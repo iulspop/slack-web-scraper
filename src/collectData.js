@@ -8,7 +8,7 @@ const fs = require('fs');
   options = {
     headless: true,
     defaultViewport: {
-      height: 2500,
+      height: 20000,
       width: 1463
     }
   }
@@ -19,7 +19,7 @@ const fs = require('fs');
   await page.goto(process.env.SLACK_WORKSPACE_URL);
 
   await gotoChannel(page, 'the-spot')
-  await page.waitForTimeout(1000)
+  await page.waitForTimeout(10000)
 
   let channelFeed = await page.$('[aria-label="the-spot (channel)"]')
   let postsHTML = await page.evaluate(feed => {

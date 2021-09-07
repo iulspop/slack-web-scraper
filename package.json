@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
     "jsonfile": "^6.1.0",
     "puppeteer": "^10.2.0"
