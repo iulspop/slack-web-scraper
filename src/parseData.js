@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const cheerio = require('cheerio')
-const { log } = require('console')
 
 let dataPath = path.resolve(__dirname, '../raw.html')
 let channelFeedData = fs.readFileSync(dataPath, 'utf-8')
@@ -16,7 +15,7 @@ signups = sortByDateAndCourse(posts)
 
 let signupsWithData = getCourseSignupReplies(signups)
 
-log(signups)
+console.log(signups)
 
 function* weeklySignups(posts) {
   let thursdayIdx = null
@@ -81,7 +80,6 @@ function getCourseSignupReplies(signups) {
   return signups
 }
 
-
 function isDayElement(post) {
   return post.match('.c-message_list__day_divider__label__pill"')
 }
@@ -89,7 +87,6 @@ function isDayElement(post) {
 function getDate(post) {
   return cheerio.load(post)('.c-message_list__day_divider__label__pill').text()
 }
-
 
 function check(cases, callbacks, toEvaluate) {
   if ( cases.length !== callbacks.length ) { throw new Error('Cases and callbacks don\'t match in length') }
