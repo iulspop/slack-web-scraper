@@ -8,10 +8,7 @@ const saveData = require('./utils/save-data');
 (async () => {
   options = {
     headless: true,
-    defaultViewport: {
-      height: 20000,
-      width: 1463
-    }
+    defaultViewport: { height: 20000, width: 1463 }
   }
   const browser = await puppeteer.launch(options);
   const page    = await browser.newPage();
@@ -21,18 +18,15 @@ const saveData = require('./utils/save-data');
   await gotoChannel(page, 'the-spot')
   await page.waitForTimeout(10000)
 
-  let channelFeedHandle = await page.$('[aria-label="the-spot (channel)"]')
-  let postsHTML = await page.evaluate(channelFeed => {
-    let posts = channelFeed.children
+  const channelFeedID = '[aria-label="the-spot (channel)"]'
+  const postHandles = await page.$$(`${channelFeedID} > div`)
 
-    let postData = []
-    for (let i = 0; i < posts.length; i++) {
-      const post = posts[i]
-      postData.push(post.outerHTML)
-    }
-
-    return postData
-  }, channelFeedHandle)
+  const postsHTML = []
+  for (let i = 0; i < postHandles.length; i++) {
+    const postHandle = postHandles[i]
+    let post = await postHandle.evaluate(post => post.outerHTML)
+    postsHTML.push(post)
+  }
 
   saveData(postsHTML.join('\n'))
 
