@@ -1,3 +1,5 @@
 node_modules/*
 .env
 slack-session-cookies.json
+raw.html
+screenshot.png
