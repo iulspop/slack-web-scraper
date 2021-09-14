@@ -1,17 +1,17 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const puppeteer = require('puppeteer');
-const ensureLogin = require('./utils/ensure-login');
-const gotoChannel = require('./utils/goto-channel');
-const saveData = require('./utils/save-data');
+const puppeteer = require('puppeteer')
+const ensureLogin = require('./utils/ensure-login')
+const gotoChannel = require('./utils/goto-channel')
+const saveData = require('./utils/save-data')
 
-(async () => {
-  options = {
+;(async () => {
+  const options = {
     headless: true,
-    defaultViewport: { height: 3000, width: 1463 }
+    defaultViewport: { height: 3000, width: 1463 },
   }
   const browser = await puppeteer.launch(options)
-  const page    = await browser.newPage()
+  const page = await browser.newPage()
   await ensureLogin(page)
 
   await page.goto(process.env.SLACK_WORKSPACE_URL)
@@ -29,12 +29,10 @@ const saveData = require('./utils/save-data');
     if (repliesButton) {
       await repliesButton.click()
       const threadHandle = await page.waitForSelector('[aria-label="Thread in the-spot (channel)"]')
-      const threadHTML   = await threadHandle.evaluate(thread => thread.outerHTML)
+      const threadHTML = await threadHandle.evaluate(thread => thread.outerHTML)
 
       postsHTML.push(threadHTML)
-    }
-
-    else {
+    } else {
       const postHTML = await postHandle.evaluate(post => post.outerHTML)
 
       postsHTML.push(postHTML)
@@ -43,6 +41,6 @@ const saveData = require('./utils/save-data');
 
   saveData(postsHTML.join('\n'))
 
-  await page.screenshot({path: './screenshot.png'})
+  await page.screenshot({ path: './screenshot.png' })
   await browser.close()
 })()

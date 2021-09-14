@@ -1,0 +1,14 @@
+{
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "extends": ["eslint:recommended", "eslint-config-prettier", "plugin:jest/recommended"],
+  "plugins": ["jest"],
+  "rules": {
+    "strict": ["error", "never"]
+  },
+  "env": {
+    "node": true,
+    "jest/globals": true
+  }
+}

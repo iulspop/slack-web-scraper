@@ -1,5 +1,15 @@
 {
+  "scripts": {
+    "test:watch": "jest --watch"
+  },
   "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "jest": "^27.2.0",
+    "prettier": "^2.4.0"
+  },
+  "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
     "jsonfile": "^6.1.0",
