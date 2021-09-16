@@ -20,4 +20,13 @@ describe('groupByMonth', () => {
       { date: 'December',  posts: ['<div></div>'] },
     ])
   })
+
+  it('Merges posts in the same month', () => {
+    let postsGroupedByDates = groupByMonth(channelFeed('./fixtures/group-by-month-merge.html'))
+    // prettier-ignore
+    expect(postsGroupedByDates).toEqual([
+      { date: 'August',    posts: ['<div>order matters</div>', '<div></div>', '<div></div>'] },
+      { date: 'September', posts: ['<div></div>'] },
+    ])
+  })
 })
