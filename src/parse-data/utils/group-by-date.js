@@ -1,23 +1,23 @@
 const cheerio = require('cheerio')
 
-function groupByDate(dates, posts) {
+function groupByDate(datesGroupedBy, posts) {
   const postsGroupedByDates = []
-  let currentDate
+  let dateGroup
 
-  for (let i = 0; i < posts.length; i++) {
-    const post = posts[i]
-
-    if (date && matches) {
-
-    } else if (currentDate) {
-      postsGroupedByDates.push({date: currentDate, posts: [post]})
+  posts.forEach(post => {
+    if (isDatePost(post) && datesGroupedBy.some(date => dateText(post).match(date))) {
+      dateGroup = createDateGroup(dateText(post))
+      postsGroupedByDates.push(dateGroup)
+    } else if (dateGroup) {
+      dateGroup.posts.push(post)
     }
-  }
-  return {}
+  })
+
+  return postsGroupedByDates
 }
 
-function isDatePost(post) {
-  
-}
+const isDatePost = post => post.match('.c-message_list__day_divider__label__pill"')
+const dateText = post => cheerio.load(post)('.c-message_list__day_divider__label__pill').text()
+const createDateGroup = dateText => ({ date: dateText, posts: [] })
 
 module.exports = groupByDate
