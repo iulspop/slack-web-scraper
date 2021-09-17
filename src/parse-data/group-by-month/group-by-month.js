@@ -1,5 +1,5 @@
-const groupByDate = require('./group-by-date')
-const createDateGroup = require('./create-date-group')
+const groupByDate = require('../group-by-date/group-by-date')
+const createDateGroup = require('../utils/create-date-group')
 
 function groupByMonth(posts) {
   const postsGroupedByDates = groupByDate(months, posts)

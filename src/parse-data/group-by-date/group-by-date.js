@@ -1,4 +1,4 @@
-const createDateGroup = require('./create-date-group')
+const createDateGroup = require('../utils/create-date-group')
 const cheerio = require('cheerio')
 
 function groupByDate(datesGroupedBy, posts) {
