@@ -11,4 +11,10 @@ describe('filterBySender', () => {
       '<div class="container"><div class="list item"><a class="c-link c-message__sender_link">Slackbot</a></div><div class="list item"><a class="c-link c-message__sender_link">Bob</a><div></div>',
     ])
   })
+
+  it('If post has nos sender, then simply ignore it', () => {
+    const posts = loadPosts(path.resolve(__dirname, 'filter-by-sender-no-sender.html'))
+    const filteredPosts = filterBySender(/Slackbot/, posts)
+    expect(filteredPosts).toEqual([])
+  })
 })
