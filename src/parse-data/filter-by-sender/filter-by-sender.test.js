@@ -4,7 +4,7 @@ const loadPosts = require('../utils/load-posts')
 const filterBySender = require('./filter-by-sender')
 
 describe('filterBySender', () => {
-  it('filters by first sender in a thread/post', () => {
+  it('Filters by first sender in a thread/post', () => {
     const posts = loadPosts(path.resolve(__dirname, 'filter-by-sender.html'))
     const filteredPosts = filterBySender(/Slackbot/, posts)
     expect(filteredPosts).toEqual([
