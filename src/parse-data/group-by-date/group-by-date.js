@@ -1,5 +1,6 @@
-const createDateGroup = require('../utils/create-date-group')
 const cheerio = require('cheerio')
+
+const createDateGroup = require('../utils/create-date-group')
 
 module.exports = groupByDate
 

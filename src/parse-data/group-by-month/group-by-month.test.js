@@ -1,9 +1,11 @@
+const path = require('path')
+
 const loadPosts = require('../utils/load-posts')
 const groupByMonth = require('./group-by-month')
 
 describe('groupByMonth', () => {
   it('Groups all channel feed posts by month of the year', () => {
-    let postsGroupedByDates = groupByMonth(loadPosts('../group-by-month/group-by-month.html'))
+    let postsGroupedByDates = groupByMonth(loadPosts(path.resolve(__dirname, 'group-by-month.html')))
     // prettier-ignore
     expect(postsGroupedByDates).toEqual([
       { date: 'January',   posts: ['<div></div>'] },
@@ -22,7 +24,7 @@ describe('groupByMonth', () => {
   })
 
   it('Merges posts in the same month', () => {
-    let postsGroupedByDates = groupByMonth(loadPosts('../group-by-month/group-by-month-merge.html'))
+    let postsGroupedByDates = groupByMonth(loadPosts(path.resolve(__dirname, 'group-by-month-merge.html')))
     // prettier-ignore
     expect(postsGroupedByDates).toEqual([
       { date: 'August',    posts: ['<div>order matters</div>', '<div></div>', '<div></div>'] },
