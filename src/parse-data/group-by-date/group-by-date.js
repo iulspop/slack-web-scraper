@@ -1,6 +1,8 @@
 const createDateGroup = require('../utils/create-date-group')
 const cheerio = require('cheerio')
 
+module.exports = groupByDate
+
 function groupByDate(datesGroupedBy, posts) {
   const postsGroupedByDates = []
   let dateGroup
@@ -19,5 +21,3 @@ function groupByDate(datesGroupedBy, posts) {
 
 const isDatePost = post => post.match('.c-message_list__day_divider__label__pill"')
 const dateText = post => cheerio.load(post)('.c-message_list__day_divider__label__pill').text()
-
-module.exports = groupByDate

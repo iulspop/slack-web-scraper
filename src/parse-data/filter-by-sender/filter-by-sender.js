@@ -1,5 +1,7 @@
 const cheerio = require('cheerio')
 
+module.exports = filterBySender
+
 function filterBySender(senderRegex, posts) {
   const filteredPosts = []
 
@@ -11,5 +13,3 @@ function filterBySender(senderRegex, posts) {
 
   return filteredPosts
 }
-
-module.exports = filterBySender

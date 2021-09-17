@@ -1,6 +1,8 @@
 const groupByDate = require('../group-by-date/group-by-date')
 const createDateGroup = require('../utils/create-date-group')
 
+module.exports = groupByMonth
+
 function groupByMonth(posts) {
   const postsGroupedByDates = groupByDate(months, posts)
   const postGroups = mapDateToMonth(postsGroupedByDates)
@@ -43,5 +45,3 @@ const months = [
   'November',
   'December',
 ]
-
-module.exports = groupByMonth
