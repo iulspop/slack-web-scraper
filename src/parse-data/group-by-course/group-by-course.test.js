@@ -3,8 +3,8 @@ const path = require('path')
 const loadPosts = require('../utils/load-posts')
 const groupByCourse = require('./group-by-course')
 
-describe('groupByMonth', () => {
-  it('Groups all channel feed posts by month of the year', () => {
+describe('groupByCourse', () => {
+  it('Groups signup posts by the course they belong to', () => {
     let courseGroups = groupByCourse(loadPosts(path.resolve(__dirname, 'group-by-course.html')))
     expect(courseGroups).toEqual({
       RB101: ['<span>Reminder: <br/><b>Ruby 101-109 Study Session: Sign Up Here!</b></span>'],
