@@ -1,9 +1,9 @@
-const channelFeed = require('../utils/channel-feed')
+const loadPosts = require('../utils/load-posts')
 const groupByDate = require('./group-by-date')
 
 describe('groupByDate', () => {
   it('Groups all channel feed posts by Thursdays', () => {
-    let postsGroupedByDates = groupByDate(['Thursday'], channelFeed('../group-by-date/group-by-date.html'))
+    let postsGroupedByDates = groupByDate(['Thursday'], loadPosts('../group-by-date/group-by-date.html'))
     expect(postsGroupedByDates).toEqual([
       {
         date: 'Thursday, September 9th',
@@ -13,7 +13,7 @@ describe('groupByDate', () => {
   })
 
   it('Groups all channel feed posts by Mondays and Thursdays', () => {
-    let postsGroupedByDates = groupByDate(['Monday', 'Thursday'], channelFeed('../group-by-date/group-by-date.html'))
+    let postsGroupedByDates = groupByDate(['Monday', 'Thursday'], loadPosts('../group-by-date/group-by-date.html'))
     expect(postsGroupedByDates).toEqual([
       {
         date: 'Monday, August 30th',
