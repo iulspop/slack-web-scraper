@@ -10,6 +10,7 @@ function countUniqueSenders(posts) {
     const senderNodes = $('.c-message__sender_link')
     for (let i = 0; i < senderNodes.length; i++) {
       const senderName = $.text([senderNodes[i]])
+      if (senderName === 'Slackbot') { continue }
       if (!senders.includes(senderName)) { senders.push(senderName) }
     }
   })
