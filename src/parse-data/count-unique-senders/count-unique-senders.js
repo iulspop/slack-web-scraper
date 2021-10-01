@@ -11,7 +11,10 @@ function countUniqueSenders(posts) {
     for (let i = 0; i < senderNodes.length; i++) {
       const senderName = $.text([senderNodes[i]])
       if (senderName === 'Slackbot') { continue }
-      if (!senders.includes(senderName)) { senders.push(senderName) }
+      if (!senders.includes(senderName)) {
+        console.log(senderName) // it seems duplicates are added for some reason and tests don't catch it
+        senders.push(senderName)
+      }
     }
   })
 
