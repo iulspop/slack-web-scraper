@@ -6,7 +6,7 @@ const gotoChannel = require('./utils/goto-channel')
 const capturePosts = require('./utils/capture-posts')
 const saveData = require('./utils/save-data')
 const scrollUp = require('./utils/scroll-up')
-const isScrolledToTop = require('./utils/scroll-up')
+const isScrolledToTop = require('./utils/is-scrolled-to-top')
 
 ;(async () => {
   const startTime = new Date()
