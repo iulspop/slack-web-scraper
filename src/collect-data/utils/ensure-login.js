@@ -1,6 +1,8 @@
 const jsonfile = require('jsonfile');
 const fs = require('fs');
 
+module.exports = ensureLogin
+
 async function ensureLogin(page) {
   try {
     const cookies = JSON.parse(fs.readFileSync(process.env.COOKIES_FILE_PATH))
@@ -25,5 +27,3 @@ async function loginAndSaveCookies(page) {
 async function saveCookies(cookies) {
   jsonfile.writeFile(process.env.COOKIES_FILE_PATH, cookies, { spaces: 2 })
 }
-
-module.exports = ensureLogin
