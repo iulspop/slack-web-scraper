@@ -25,9 +25,9 @@ const isScrolledToTop = require('./utils/is-scrolled-to-top')
 
   const channelFeedID = '[aria-label="the-spot (channel)"]'
   const channelFeedHandle = await page.$(channelFeedID)
-  const postHandles = await page.$$(`${channelFeedID} > div`)
 
   do {
+    const postHandles = await page.$$(`${channelFeedID} > div`)
     const postsHTML = await capturePosts(page, postHandles)
     saveData(postsHTML)
     await scrollUp(page, channelFeedID)

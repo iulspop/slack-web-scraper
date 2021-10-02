@@ -3,12 +3,13 @@ module.exports = capturePosts
 async function capturePosts(page, postHandles) {
   const postsHTML = []
 
-  for (let i = 0; i < postHandles.length; i++) {
+  // Starts at index 1 to skip first child element div.p-degraded_list__loading
+  for (let i = 1; i < postHandles.length; i++) {
     const postHandle = postHandles[i]
-    // if (await postHandle.evaluate(post => post.randomTurtleDragon)) {
-    //   console.log('broke at ' + i)
-    //   break
-    // }
+    if (await postHandle.evaluate(post => post.alreadyCapturedByScrapper)) {
+      console.log('broke at ' + i)
+      break
+    }
 
     const repliesButton = await postHandle.$('.c-message__reply_count')
     if (repliesButton) {
@@ -22,7 +23,7 @@ async function capturePosts(page, postHandles) {
       postsHTML.push(postHTML)
     }
 
-    // await postHandle.evaluate(post => (post.randomTurtleDragon = true))
+    await postHandle.evaluate(post => (post.alreadyCapturedByScrapper = true))
   }
 
   return postsHTML
