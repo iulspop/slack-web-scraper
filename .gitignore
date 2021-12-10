@@ -3,3 +3,4 @@ node_modules/*
 slack-session-cookies.json
 raw.html
 screenshot.png
+example-data/
