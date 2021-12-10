@@ -23,7 +23,8 @@ const isScrolledToTop = require('./utils/is-scrolled-to-top')
   await gotoChannel(page, 'the-spot')
   await page.waitForTimeout(10000)
 
-  const channelFeedID = '[aria-label="the-spot (channel)"]'
+  const channelFeedName = 'the-spot (channel)'
+  const channelFeedID = `[aria-label="${channelFeedName}"]`
   const channelFeedHandle = await page.$(channelFeedID)
 
   do {
