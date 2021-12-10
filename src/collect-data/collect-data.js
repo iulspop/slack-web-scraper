@@ -13,7 +13,7 @@ const isScrolledToTop = require('./utils/is-scrolled-to-top')
 
   const options = {
     headless: true,
-    defaultViewport: { height: 4000, width: 1463 },
+    defaultViewport: { height: 8000, width: 1463 },
   }
   const browser = await puppeteer.launch(options)
   const page = await browser.newPage()

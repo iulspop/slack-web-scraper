@@ -18,7 +18,7 @@ function studentsInterestedPerCoursePerWeek(posts) {
     const courses = thursday.courses
     for (let course in courses) {
       let signupPosts = courses[course]
-      courses[course] = { studentsInterested: countUniqueSenders(signupPosts) }
+      courses[course] = countUniqueSenders(signupPosts)
     }
 
     return thursday
