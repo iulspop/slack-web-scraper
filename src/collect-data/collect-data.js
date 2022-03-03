@@ -20,21 +20,23 @@ const isScrolledToTop = require('./utils/is-scrolled-to-top')
   }
   const browser = await puppeteer.launch(options)
   const page = await browser.newPage()
+
   await ensureLogin(page)
 
   await page.goto(process.env.SLACK_WORKSPACE_URL)
+  await page.waitForNavigation({ waitUntil: 'load' })
   await gotoChannel(page, 'the-spot')
-  await page.waitForTimeout(10000)
 
   const channelFeedName = 'the-spot (channel)'
-  const channelFeedID = `[aria-label="${channelFeedName}"]`
-  const channelFeedHandle = await page.$(channelFeedID)
+  const channelFeedSelector = `[aria-label="${channelFeedName}"]`
+  await page.waitForSelector(channelFeedSelector)
+  const channelFeedHandle = await page.$(channelFeedSelector)
 
   do {
-    const postHandles = await page.$$(`${channelFeedID} > div`)
+    const postHandles = await page.$$(`${channelFeedSelector} > div`)
     const postsHTML = await capturePosts(page, postHandles)
     saveData(postsHTML)
-    await scrollUp(page, channelFeedID)
+    await scrollUp(page, channelFeedSelector)
   } while (!(await isScrolledToTop(channelFeedHandle)))
 
   await page.screenshot({ path: './screenshot.png' })
