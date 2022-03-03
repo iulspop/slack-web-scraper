@@ -25,10 +25,9 @@ const isScrolledToTop = require('./utils/is-scrolled-to-top')
 
   await page.goto(process.env.SLACK_WORKSPACE_URL)
   await page.waitForNavigation({ waitUntil: 'load' })
-  await gotoChannel(page, 'the-spot')
+  await gotoChannel(page, process.env.CHANNEL_FEED_NAME)
 
-  const channelFeedName = 'the-spot (channel)'
-  const channelFeedSelector = `[aria-label="${channelFeedName}"]`
+  const channelFeedSelector = `[aria-label="${process.env.CHANNEL_FEED_NAME} (channel)"]`
   await page.waitForSelector(channelFeedSelector)
   const channelFeedHandle = await page.$(channelFeedSelector)
 
