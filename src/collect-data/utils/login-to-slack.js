@@ -1,9 +1,9 @@
 const jsonfile = require('jsonfile')
 const fs = require('fs')
 
-module.exports = ensureLogin
+module.exports = loginToSlack
 
-async function ensureLogin(page) {
+async function loginToSlack(page) {
   try {
     const cookies = JSON.parse(fs.readFileSync('./slack-session-cookies.json'))
     for (let cookie of cookies) {

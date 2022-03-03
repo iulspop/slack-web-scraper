@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const puppeteer = require('puppeteer')
-const ensureLogin = require('./utils/ensure-login')
+const loginToSlack = require('./utils/login-to-slack')
 const gotoChannel = require('./utils/goto-channel')
 const capturePosts = require('./utils/capture-posts')
 const saveData = require('./utils/save-data')
@@ -21,7 +21,7 @@ const isScrolledToTop = require('./utils/is-scrolled-to-top')
   const browser = await puppeteer.launch(options)
   const page = await browser.newPage()
 
-  await ensureLogin(page)
+  await loginToSlack(page)
 
   await page.goto(process.env.SLACK_WORKSPACE_URL)
   await page.waitForNavigation({ waitUntil: 'load' })
