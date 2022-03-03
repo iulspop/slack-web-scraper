@@ -2,39 +2,44 @@
 
 ## What is it?
 
-This is a web scraper that uses Puppeteer (headless browser) to navigate to Slack and scrape data from a given channel feed.
+A web scraper that navigates to a Slack workspace and save the posts and threads of a given channel feed.
 
-It was originaly intended to help moderators of a study community have a pulse on the health of a community by answering common questions like how many people are active, which courses are most popular. This was achieved through collecting data from the Slack channel where people organized study groups and parsing it.
+It uses [Puppeteer headless browser](https://puppeteer.github.io/puppeteer/) for loading and interacting with Slack. It doesn't depend on installing an app in the Slack workspace. Instead, it logins to your Slack account and uses that to access the channel feed.
 
-## How to use it?
+It can be helpful for saving information from a channel without needing to ask a workspace administrator to export the data.
 
-The `src/` directory contains two folders: `collect-data` and `parse-data`.
+## How to collect the data?
 
-### Collect Data
-
-`collect-data.js` is a script that starts a headless browser and uses it to scrape Slack and save the data to a file. It's configured to save each post & thread in a channel starting from the most recent, scrolling all the way up to the top of the feed until there are no more posts loaded. The posts/threads are saved as raw HTML in one file.
-
-To run the script and collect data:
 1. Run `npm install` to install the dependencies.
 2. Configure a `.env` file in the project root folder. Four environment variables must be configured:
+
 ```
 SLACK_WORKSPACE_URL=https://x.slack.com
 SLACK_EMAIL=
 SLACK_PASSWORD=
-COOKIES_FILE_PATH=
+CHANNEL_FEED_NAME=
 ```
-   - `COOKIES_FILE_PATH` is where the session cookies after loging in to a Slack Workspace are saved. The cookies are used to skip authentication when running the script repeatedly. The file path is relative to the working directory. The working directory is the directory from which you run the script, probably the project root.
-   - The other variables are used for the headless browser to login to the Slack Workspace to collect the data.
- 3. Set the `channelFeedName` to the name of the channel you want to scrape. For example `const channelFeedName = 'random-banter'.
- 4. Run `node ./src/collect-data.js`. That will launch Puppeteer and it will collect the data for all the posts/threads on that channel.
 
- Once the script finishes. The should be a `raw.html` file saved in the working directory. It will containing the HTML for every post (single post sent by a Slack user or bot) or a thread (the post and all the replies). Each post/thread is saved on a single line.
+For `SLACK_WORKSPACE_URL` it must be the URL you login to the workspace with like `cloud-native.slack.com` not `app.slack.com`. The email & password is the credentials you login to the workspace with. The `CHANNEL_FEED_NAME` is the same as you see under "channels" side tab in Slack, for example: "general" or "random".
 
- From here you must parse the HTML to gain the useful information and answer the questions that you want.
+3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `collect-data.js` to turn on headless mode.
 
-### Parse Data
+## How to parse the Data?
+
+Once the scraper has reached the top of the channel and collected all the data, it will close the browser. There will be a file output called `raw.html` in the project directory.
+
+`raw.html` contains the HTML for the posts and threads saved from the Slack channel. A post is a single post with no replies. A thread is a post and all its replies. Each post or thread is saved on one line. A post can be by a Slack Bot or user or the day divider line that marks the day.
+
 Once the data is collected, you will need to parse the HTML. The `parse-data` folder contains scripts for parsing the HTML for a specific case. Some functions and their tests can be reused for other cases, like `countUniqueSenders`, `filterBySender`, `groupByDate`, `groupByMonth`. These can be used to manipulate the HTML data. Note that they depend on how the Slack app is implemented. If the class names for certain elements change, then the functions may not work as expected.
 
-## Misc
+## How does it work?
 
- Note for WSL users: you will need configure WSL to run GUI interfaces even if the browser launches in headless mode. Use [this guide](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress) to configure an X-server for running your display from Windows. Make sure to have it open before trying to start Puppeteer or it will not work.
+`collect-data.js` starts the headless browser, scrapes Slack and saves the data to `raw.html`. It's configured to save each post & thread in a channel starting from the most recent, scrolling all the way up to the top of the feed until there are no more posts loaded.
+
+## Background
+
+This tool was developed to help moderators of a study community have a pulse on the health of a community by answering common questions like how many people are active, which courses are most popular. We did that through collecting data from the Slack channel where people organized study groups and parsing it.
+
+## Note for WSL users
+
+You will need configure WSL to run GUI interfaces even if the browser launches in headless mode. Use [this guide](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress) to configure an X-server for running your display from Windows. Make sure to have it open before trying to start Puppeteer or it will not work.

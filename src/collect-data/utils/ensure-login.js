@@ -5,7 +5,7 @@ module.exports = ensureLogin
 
 async function ensureLogin(page) {
   try {
-    const cookies = JSON.parse(fs.readFileSync(process.env.COOKIES_FILE_PATH))
+    const cookies = JSON.parse(fs.readFileSync('./slack-session-cookies.json'))
     for (let cookie of cookies) {
       await page.setCookie(cookie)
     }
