@@ -38,7 +38,7 @@ describe('studentsInterestedPerCoursePerWeek', () => {
           JS175: { studentsInterested: 0 },
           JS185: { studentsInterested: 0 },
           JS210: { studentsInterested: 13 }, // not working
-          JS225: { studentsInterested: 3 },  // not working
+          JS225: { studentsInterested: 3 }, // not working
           JS230: { studentsInterested: 0 },
           LS170: { studentsInterested: 6 }, // not working
           LS180: { studentsInterested: 3 },

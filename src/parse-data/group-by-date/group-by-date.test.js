@@ -15,7 +15,10 @@ describe('groupByDate', () => {
   })
 
   it('Groups all channel feed posts by Mondays and Thursdays', () => {
-    let postsGroupedByDates = groupByDate(['Monday', 'Thursday'], loadPosts(path.resolve(__dirname, 'group-by-date.html')))
+    let postsGroupedByDates = groupByDate(
+      ['Monday', 'Thursday'],
+      loadPosts(path.resolve(__dirname, 'group-by-date.html'))
+    )
     expect(postsGroupedByDates).toEqual([
       {
         date: 'Monday, August 30th',

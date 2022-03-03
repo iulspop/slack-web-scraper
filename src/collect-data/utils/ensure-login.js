@@ -1,19 +1,21 @@
-const jsonfile = require('jsonfile');
-const fs = require('fs');
+const jsonfile = require('jsonfile')
+const fs = require('fs')
 
 module.exports = ensureLogin
 
 async function ensureLogin(page) {
   try {
     const cookies = JSON.parse(fs.readFileSync(process.env.COOKIES_FILE_PATH))
-    for (let cookie of cookies) { await page.setCookie(cookie) }
+    for (let cookie of cookies) {
+      await page.setCookie(cookie)
+    }
   } catch {
     await loginAndSaveCookies(page)
   }
 }
 
 async function loginAndSaveCookies(page) {
-  await page.goto(process.env.SLACK_WORKSPACE_URL);
+  await page.goto(process.env.SLACK_WORKSPACE_URL)
 
   await page.type('#email', process.env.SLACK_EMAIL)
   await page.type('#password', process.env.SLACK_PASSWORD)

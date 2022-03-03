@@ -7,7 +7,9 @@ function groupByCourse(posts) {
     for (let i = 0; i < courses.length; i++) {
       const course = courses[i]
       const courseRegex = courseRegexes[i]
-      if (courseRegex.test(post)) { courseGroups[course].push(post) }
+      if (courseRegex.test(post)) {
+        courseGroups[course].push(post)
+      }
     }
   })
 
@@ -19,7 +21,7 @@ const createCourseGroups = courses => {
 
   courses.forEach(course => {
     courseGroups[course] = []
-  });
+  })
 
   return courseGroups
 }
