@@ -5,7 +5,7 @@ const { launchBrowser } = require('./utils/launchBrowser')
 const { loginToSlack } = require('./utils/loginToSlack')
 const { gotoChannel } = require('./utils/gotoChannel')
 const { gotoWorkspace } = require('./utils/gotoWorkspace')
-const { collectAndSavePostsAndThreads } = require('./utils/collectAndSavePostsAndThreads')
+const { collectPosts } = require('./utils/collectPosts')
 const { closeBrowser } = require('./utils/closeBrowser')
 
 ;(async () => {
@@ -16,7 +16,7 @@ const { closeBrowser } = require('./utils/closeBrowser')
   await gotoWorkspace(page)
   await gotoChannel(page)
 
-  await collectAndSavePostsAndThreads(page)
+  await collectPosts(page)
 
   await closeBrowser(browser)
 })()

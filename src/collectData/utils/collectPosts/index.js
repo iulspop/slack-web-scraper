@@ -1,9 +1,9 @@
-const { capturePosts } = require('./capturePosts')
-const { saveData } = require('./saveData')
-const { scrollUp } = require('./scrollUp')
-const { isScrolledToTop } = require('./isScrolledToTop')
+const { capturePosts } = require('./utils/capturePosts')
+const { saveData } = require('./utils/saveData')
+const { scrollUp } = require('./utils/scrollUp')
+const { isScrolledToTop } = require('./utils/isScrolledToTop')
 
-async function collectAndSavePostsAndThreads(page) {
+async function collectPosts(page) {
   const channelFeedSelector = `[aria-label="${process.env.CHANNEL_FEED_NAME} (channel)"]`
   await page.waitForSelector(channelFeedSelector)
   const channelFeedHandle = await page.$(channelFeedSelector)
@@ -16,4 +16,4 @@ async function collectAndSavePostsAndThreads(page) {
   } while (!(await isScrolledToTop(channelFeedHandle)))
 }
 
-exports.collectAndSavePostsAndThreads = collectAndSavePostsAndThreads
+exports.collectPosts = collectPosts
