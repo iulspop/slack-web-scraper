@@ -11,16 +11,19 @@ It can be helpful for saving information from a channel without needing to ask a
 ## How to collect the data?
 
 1. Run `npm install` to install the dependencies.
-2. Configure a `.env` file in the project root folder. Four environment variables must be configured:
+2. Configure a `.env` file in the project root folder. The environment variables must be configured:
 
 ```
 SLACK_WORKSPACE_URL=https://x.slack.com
 SLACK_EMAIL=
 SLACK_PASSWORD=
 CHANNEL_FEED_NAME=
+CONVERSATION_NAME=
 ```
 
 For `SLACK_WORKSPACE_URL` it must be the URL you login to the workspace with like `cloud-native.slack.com` not `app.slack.com`. The email & password is the credentials you login to the workspace with. The `CHANNEL_FEED_NAME` is the same as you see under "channels" side tab in Slack, for example: "general" or "random".
+
+Optionally, to scrape a DM, you can set `CONVERSATION_NAME` to the exact name tag of the person as is written under "Direct Messages" in Slack. It will the overwrite `CHANNEL_FEED_NAME`.
 
 3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `collectData.js` to turn on headless mode.
 

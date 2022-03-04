@@ -4,7 +4,10 @@ const { scrollUp } = require('./utils/scrollUp')
 const { isScrolledToTop } = require('./utils/isScrolledToTop')
 
 async function collectPosts(page) {
-  const channelFeedSelector = `[aria-label="${process.env.CHANNEL_FEED_NAME} (channel)"]`
+  let channelFeedSelector = `[aria-label="${process.env.CHANNEL_FEED_NAME} (channel)"]`
+  if (process.env.CONVERSATION_NAME) {
+    channelFeedSelector = `[aria-label="Conversation with @${process.env.CONVERSATION_NAME}"]`
+  }
   await page.waitForSelector(channelFeedSelector)
   const channelFeedHandle = await page.$(channelFeedSelector)
 
