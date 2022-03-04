@@ -22,7 +22,7 @@ CHANNEL_FEED_NAME=
 
 For `SLACK_WORKSPACE_URL` it must be the URL you login to the workspace with like `cloud-native.slack.com` not `app.slack.com`. The email & password is the credentials you login to the workspace with. The `CHANNEL_FEED_NAME` is the same as you see under "channels" side tab in Slack, for example: "general" or "random".
 
-3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `collect-data.js` to turn on headless mode.
+3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `collectData.js` to turn on headless mode.
 
 ## How to parse the Data?
 
@@ -34,7 +34,7 @@ Once the data is collected, you will need to parse the HTML. The `parse-data` fo
 
 ## How does it work?
 
-`collect-data.js` starts the headless browser, scrapes Slack and saves the data to `raw.html`. It's configured to save each post & thread in a channel starting from the most recent, scrolling all the way up to the top of the feed until there are no more posts loaded.
+`collectData.js` starts the headless browser, scrapes Slack and saves the data to `raw.html`. It's configured to save each post & thread in a channel starting from the most recent, scrolling all the way up to the top of the feed until there are no more posts loaded.
 
 ## Background
 

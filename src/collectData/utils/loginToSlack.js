@@ -1,8 +1,6 @@
 const jsonfile = require('jsonfile')
 const fs = require('fs')
 
-module.exports = loginToSlack
-
 async function loginToSlack(page) {
   try {
     const cookies = JSON.parse(fs.readFileSync('./slack-session-cookies.json'))
@@ -29,3 +27,5 @@ async function loginAndSaveCookies(page) {
 async function saveCookies(cookies) {
   jsonfile.writeFile(process.env.COOKIES_FILE_PATH, cookies, { spaces: 2 })
 }
+
+exports.loginToSlack = loginToSlack

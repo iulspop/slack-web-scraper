@@ -1,6 +1,5 @@
-module.exports = gotoChannel
-
-async function gotoChannel(page, channelName) {
+async function gotoChannel(page) {
+  const channelName = process.env.CHANNEL_FEED_NAME
   let channels = await page.$$('.p-channel_sidebar__name')
   let [channelButton] = await filterByText(page, channels, channelName)
   await channelButton.click()
@@ -17,3 +16,5 @@ async function filterByText(page, elementHandles, textString) {
   }
   return filteredElementHandles
 }
+
+exports.gotoChannel = gotoChannel

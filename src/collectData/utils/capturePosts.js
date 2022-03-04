@@ -1,5 +1,3 @@
-module.exports = capturePosts
-
 async function capturePosts(page, postHandles) {
   const postsHTML = []
 
@@ -28,3 +26,5 @@ async function capturePosts(page, postHandles) {
 
   return postsHTML
 }
+
+exports.capturePosts = capturePosts

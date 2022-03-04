@@ -1,7 +1,5 @@
 const fs = require('fs')
 
-module.exports = saveData
-
 function saveData(postsHTML) {
   const filePath = './raw.html'
 
@@ -24,3 +22,5 @@ const confirmWrite = msg => error => {
   if (error) throw error
   console.log(msg)
 }
+
+exports.saveData = saveData
