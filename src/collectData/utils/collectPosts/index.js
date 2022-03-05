@@ -4,10 +4,7 @@ const { scrollUp } = require('./utils/scrollUp')
 const { isScrolledToTop } = require('./utils/isScrolledToTop')
 
 async function collectPosts(page) {
-  let channelFeedSelector = `[aria-label="${process.env.CHANNEL_FEED_NAME} (channel)"]`
-  if (process.env.CONVERSATION_NAME) {
-    channelFeedSelector = `[aria-label="Conversation with @${process.env.CONVERSATION_NAME}"]`
-  }
+  let channelFeedSelector = '[data-qa="slack_kit_list"].c-virtual_list__scroll_container[role="list"]'
   await page.waitForSelector(channelFeedSelector)
   const channelFeedHandle = await page.$(channelFeedSelector)
 
