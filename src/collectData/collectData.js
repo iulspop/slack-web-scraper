@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const { recordTime } = require('./utils/recordTime')
+const { recordScrapeDuration } = require('./utils/recordScrapeDuration')
 const { launchBrowser } = require('./utils/launchBrowser')
 const { loginToSlack } = require('./utils/loginToSlack')
 const { gotoChannel } = require('./utils/gotoChannel')
@@ -9,7 +9,7 @@ const { collectPosts } = require('./utils/collectPosts')
 const { closeBrowser } = require('./utils/closeBrowser')
 
 ;(async () => {
-  recordTime()
+  recordScrapeDuration()
   const { page, browser } = await launchBrowser()
 
   await loginToSlack(page)
