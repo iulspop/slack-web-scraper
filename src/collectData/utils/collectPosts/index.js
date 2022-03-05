@@ -1,6 +1,6 @@
-const { extractPostsHTML } = require('./utils/extractPostsHTML')
-const { initSlackDataFile } = require('./utils/initSlackDataFile')
 const { ScrollFeed } = require('./utils/scrollFeed')
+const { initSlackDataFile } = require('./utils/initSlackDataFile')
+const { extractPostsHTML } = require('./utils/extractPostsHTML')
 
 async function collectPosts(page) {
   const channelFeedSelector = '[data-qa="slack_kit_list"].c-virtual_list__scroll_container[role="list"]'
