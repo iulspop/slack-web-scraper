@@ -8,7 +8,7 @@ async function extractPostsHTML(page, postsSelector) {
   for (let i = 1; i < postHandles.length; i++) {
     const postHandle = postHandles[i]
 
-    if (await postHandle.evaluate(post => post.alreadyCapturedByScrapper)) break
+    if (await postHandle.evaluate(post => post.isScraped)) break
 
     const repliesButton = await postHandle.$('.c-message__reply_count')
     if (repliesButton) {
@@ -19,7 +19,7 @@ async function extractPostsHTML(page, postsSelector) {
       postsHTML.push(postHTML)
     }
 
-    await postHandle.evaluate(post => (post.alreadyCapturedByScrapper = true))
+    await postHandle.evaluate(post => (post.isScraped = true))
   }
 
   return postsHTML
