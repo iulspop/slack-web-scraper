@@ -1,5 +1,5 @@
 const { extractPostsHTML } = require('./utils/extractPostsHTML')
-const { writeHTMLToFile } = require('./utils/writeHTMLToFile')
+const { initSlackDataFile } = require('./utils/initSlackDataFile')
 const { scrollUp } = require('./utils/scrollUp')
 const { isScrolledToTop } = require('./utils/isScrolledToTop')
 
@@ -8,9 +8,10 @@ async function collectPosts(page) {
   const postsSelector = `${channelFeedSelector} > div`
   const channelFeedHandle = await page.waitForSelector(channelFeedSelector)
 
+  const appendHTMLToSlackDataFile = await initSlackDataFile()
   do {
     const postsHTML = await extractPostsHTML(page, postsSelector)
-    writeHTMLToFile(postsHTML)
+    appendHTMLToSlackDataFile(postsHTML)
     await scrollUp(page, channelFeedSelector)
   } while (!(await isScrolledToTop(channelFeedHandle)))
 }
