@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-function saveData(postsHTML) {
+function writeHTMLToFile(postsHTML) {
   const filePath = './raw.html'
 
   fileExist(filePath)
@@ -23,4 +23,4 @@ const confirmWrite = msg => error => {
   console.log(msg)
 }
 
-exports.saveData = saveData
+exports.writeHTMLToFile = writeHTMLToFile

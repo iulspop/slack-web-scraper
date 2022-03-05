@@ -1,5 +1,5 @@
-const { capturePosts } = require('./utils/capturePosts')
-const { saveData } = require('./utils/saveData')
+const { extractPostsHTML } = require('./utils/extractPostsHTML')
+const { writeHTMLToFile } = require('./utils/writeHTMLToFile')
 const { scrollUp } = require('./utils/scrollUp')
 const { isScrolledToTop } = require('./utils/isScrolledToTop')
 
@@ -9,8 +9,8 @@ async function collectPosts(page) {
   const channelFeedHandle = await page.waitForSelector(channelFeedSelector)
 
   do {
-    const postsHTML = await capturePosts(page, postsSelector)
-    saveData(postsHTML)
+    const postsHTML = await extractPostsHTML(page, postsSelector)
+    writeHTMLToFile(postsHTML)
     await scrollUp(page, channelFeedSelector)
   } while (!(await isScrolledToTop(channelFeedHandle)))
 }
