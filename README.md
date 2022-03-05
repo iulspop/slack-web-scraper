@@ -11,7 +11,7 @@ It can be helpful for saving information from a channel without needing to ask a
 ## How to collect the data?
 
 1. Run `npm install` to install the dependencies.
-2. Configure a `.env` file in the project root folder. The environment variables must be configured:
+2. Configure a `.env` file in the project root folder. The following environment variables can be set:
 
 ```
 SLACK_WORKSPACE_URL=https://x.slack.com
@@ -19,13 +19,24 @@ SLACK_EMAIL=
 SLACK_PASSWORD=
 CHANNEL_FEED_NAME=
 CONVERSATION_NAME=
+SCROLL_UP_TIMEOUT=
 ```
 
-For `SLACK_WORKSPACE_URL` it must be the URL you login to the workspace with like `cloud-native.slack.com` not `app.slack.com`. The email & password is the credentials you login to the workspace with. The `CHANNEL_FEED_NAME` is the same as you see under "channels" side tab in Slack, for example: "general" or "random".
+`SLACK_WORKSPACE_URL`, `SLACK_EMAIL` and `SLACK_PASSWORD` are required.
 
-Optionally, to scrape a DM, you can set `CONVERSATION_NAME` to the exact name tag of the person as is written under "Direct Messages" in Slack. It will the overwrite `CHANNEL_FEED_NAME`.
+- `SLACK_WORKSPACE_URL` must be the URL you login to the workspace not `app.slack.com`. Example: `SLACK_WORKSPACE_URL=cloud-native.slack.com`. Note environment variables are set without quotes.
+- `SLACK_EMAIL` and `SLACK_PASSWORD` are credentials used to login into the workspace.
 
-3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `collectData.js` to turn on headless mode.
+Either set `CHANNEL_FEED_NAME` or alernatively `CONVERSATION_NAME`.
+
+- Set `CHANNEL_FEED_NAME` to scrape a public or private channel. It's name you see under "channels" side tab in Slack. Example: `CHANNEL_FEED_NAME=general`.
+- Set `CONVERSATION_NAME` to scrape a DM or group chat. The value is the exact name tag of the person or group chat name as is written under "Direct Messages" in Slack. Example: `CONVERSATION_NAME=Iuliu Pop (Core Grad)`
+
+`SCROLL_UP_TIMEOUT` is optional.
+
+- A timeout in seconds for when to stop scrolling up the channel history and start scraping posts. Useful when scraping channels with a long history but don't need to scrape it all. For a very active channel, it could take 30 seconds to scroll up half a year then ~20min to scrape it. Example: `SCROLL_UP_TIMEOUT=30`
+
+3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `launchBrowser.js` to run the scraper in headless mode.
 
 ## How to parse the Data?
 

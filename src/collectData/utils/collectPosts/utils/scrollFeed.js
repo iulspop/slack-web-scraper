@@ -1,11 +1,15 @@
+const SCROLL_UP_TIMEOUT = process.env.SCROLL_UP_TIMEOUT
+
 async function ScrollFeed(page, channelFeedSelector) {
   const channelFeedHandle = await page.waitForSelector(channelFeedSelector)
 
   return {
     async toTop(onScrollCallback = async () => {}) {
+      const startTime = new Date()
       do {
         await onScrollCallback()
         await this.up()
+        if (SCROLL_UP_TIMEOUT && differenceInSeconds(startTime, new Date()) > SCROLL_UP_TIMEOUT) break
       } while (!(await this.isScrolledToTop()))
     },
     async toBottom(onScrollCallback = async () => {}) {
@@ -16,7 +20,7 @@ async function ScrollFeed(page, channelFeedSelector) {
     },
     async up() {
       await page.hover(channelFeedSelector)
-      await page.mouse.wheel({ deltaY: -8000 })
+      await page.mouse.wheel({ deltaY: -50000 })
       await page.waitForNetworkIdle()
     },
     async down() {
@@ -32,6 +36,10 @@ async function ScrollFeed(page, channelFeedSelector) {
       return await channelFeedHandle.evaluate(el => window.innerHeight - el.getBoundingClientRect().bottom > 0)
     },
   }
+}
+
+function differenceInSeconds(startTime, endTime) {
+  return Math.floor((endTime - startTime) / 1000)
 }
 
 exports.ScrollFeed = ScrollFeed
