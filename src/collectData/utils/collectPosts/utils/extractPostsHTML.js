@@ -8,10 +8,7 @@ async function extractPostsHTML(page, postsSelector) {
   for (let i = 1; i < postHandles.length; i++) {
     const postHandle = postHandles[i]
 
-    if (await postHandle.evaluate(post => post.alreadyCapturedByScrapper)) {
-      console.log('broke at ' + i)
-      break
-    }
+    if (await postHandle.evaluate(post => post.alreadyCapturedByScrapper)) break
 
     const repliesButton = await postHandle.$('.c-message__reply_count')
     if (repliesButton) {
