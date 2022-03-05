@@ -1,4 +1,5 @@
-async function capturePosts(page, postHandles) {
+async function capturePosts(page, postsSelector) {
+  const postHandles = await page.$$(postsSelector)
   const postsHTML = []
 
   // Starts at index 1 to skip first child element div.p-degraded_list__loading
@@ -14,14 +15,16 @@ async function capturePosts(page, postHandles) {
       await repliesButton.click()
       await repliesButton.click()
       await repliesButton.click()
-      const threadHandle = await page.waitForSelector(
+
+      const threadSelector =
         '[data-qa="slack_kit_list"].c-virtual_list__scroll_container[role="list"][aria-label^="Thread"]'
-      )
+      const threadHandle = await page.waitForSelector(threadSelector)
       const threadHTML = await threadHandle.evaluate(thread => thread.outerHTML)
-      postsHTML.push(threadHTML)
 
       const closeThreadButton = await page.$('[aria-label="Close Right Sidebar"]')
       await closeThreadButton.click()
+
+      postsHTML.push(threadHTML)
     } else {
       const postHTML = await postHandle.evaluate(post => post.outerHTML)
       postsHTML.push(postHTML)
