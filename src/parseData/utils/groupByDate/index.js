@@ -1,5 +1,6 @@
 const { Date } = require('sugar')
 const cheerio = require('cheerio')
+const { isValidDateDividerLine } = require('../filterHTMLByValidElement')
 
 function groupByDate(html) {
   const htmlLines = html.split('\n')
@@ -7,7 +8,7 @@ function groupByDate(html) {
   const dateGroups = []
   let dateGroup
   htmlLines.forEach(html => {
-    if (isDateDividerLine(html)) {
+    if (isValidDateDividerLine(html)) {
       dateGroup = DateGroup(dateText(html))
       dateGroups.push(dateGroup)
     } else if (dateGroup) {
@@ -23,7 +24,6 @@ function DateGroup(date) {
   return { timestamp, date, posts: [] }
 }
 
-const isDateDividerLine = post => post.match('.c-message_list__day_divider__label__pill"')
 const dateText = post => cheerio.load(post)('.c-message_list__day_divider__label__pill').text()
 
 exports.groupByDate = groupByDate

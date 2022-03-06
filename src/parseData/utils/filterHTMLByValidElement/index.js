@@ -3,7 +3,9 @@ const cheerio = require('cheerio')
 function filterHTMLByValidElement(html) {
   const htmlLines = html.split('\n')
 
-  const newHTMLLines = htmlLines.filter(html => isValidPost(html) || isValidThread(html) || isValidDateDividerLine(html))
+  const newHTMLLines = htmlLines.filter(
+    html => isValidPost(html) || isValidThread(html) || isValidDateDividerLine(html)
+  )
 
   /*
   ENABLE WHEN DEBUGGING
@@ -35,7 +37,7 @@ const isValidThread = html => {
 
 const isValidDateDividerLine = html => {
   const $ = cheerio.load(html)
-  const loadedCheerio = $('.c-button-unstyled.c-message_list__day_divider__label__pill')
+  const loadedCheerio = $('.c-message_list__day_divider__label__pill')
   return loadedCheerio.length === 1
 }
 
