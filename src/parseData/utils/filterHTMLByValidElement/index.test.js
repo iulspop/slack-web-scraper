@@ -1,10 +1,5 @@
-const fs = require('fs')
-const path = require('path')
 const { filterHTMLByValidElement, isValidPost, isValidThread, isValidDateDividerLine } = require('./index')
-
-function loadFile(absolutePath) {
-  return fs.readFileSync(absolutePath, 'utf-8')
-}
+const { loadTestFile } = require('../loadTestFile')
 
 describe('filterHTMLByValidElement()', () => {
   it('filters invalid posts', () => {
@@ -17,7 +12,7 @@ describe('filterHTMLByValidElement()', () => {
 
 describe('isValidPost()', () => {
   it('returns true when post valid', () => {
-    const validPost = loadFile(path.resolve(__dirname, './valid-post.html'))
+    const validPost = loadTestFile(__dirname, './valid-post.html')
     expect(isValidPost(validPost)).toBe(true)
   })
 
@@ -29,7 +24,7 @@ describe('isValidPost()', () => {
 
 describe('isValidThread()', () => {
   it('returns true when thread valid', () => {
-    const validThread = loadFile(path.resolve(__dirname, './valid-thread.html'))
+    const validThread = loadTestFile(__dirname, './valid-thread.html')
     expect(isValidThread(validThread)).toBe(true)
   })
 
@@ -41,7 +36,7 @@ describe('isValidThread()', () => {
 
 describe('isValidDateDividerLine()', () => {
   it('returns true when day divider line valid', () => {
-    const validDayDividerLine = loadFile(path.resolve(__dirname, './valid-date-divider-line.html'))
+    const validDayDividerLine = loadTestFile(__dirname, './valid-date-divider-line.html')
     expect(isValidDateDividerLine(validDayDividerLine)).toBe(true)
   })
 

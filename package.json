@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test:watch": "jest --watch",
+    "test": "jest --watch",
     "collect": "node src/collectData/collectData.js",
     "parse": "node src/parseData/parseData.js"
   },
