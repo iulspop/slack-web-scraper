@@ -1,70 +1,21 @@
-/*
+const { File } = require('./utils/file')
+const { pipe } = require('./utils/pipe')
+const { encodeNewlinePreElements } = require('./utils/encodeNewlinePreElements')
+const { filterHTMLByValidElement } = require('./utils/filterHTMLByValidElement')
 
-parse one file in slack-data.
-  hardcode cli input in script X
-  actually hardcode in the code for starters
+const filePath = 'slack-data/2022-03-05-17-52-34.html'
+const file = File(filePath)
 
-pipe through intermediary transformations/files
+const parseHTML = pipe(
+  file.read,
+  encodeNewlinePreElements,
+  file.saveNewWithExtension('.0-newline-encoded-pre-elements.html'),
+  filterHTMLByValidElement,
+  file.saveNewWithExtension('.1-filter-unexpected-elements.html')
+  // groupByTimestamp,
+  // file.saveNewWithExtension('.group-by-date.json'),
+  // parsePostsToJson,
+  // file.saveNewWithExtension('.json')
+)
 
-timestamp.newline-encoded-pre-element.html
-timestamp.filter-unexpected-elements.html
-timestamp.group-by-date.json
-timestamp.transform-posts-and-threads.json
-
-timestamp.json
-
-when debugging leave intermediary temp files
-
-when not debugging, clean up and only keep timestamp.json
-
-*/
-
-/*
-
-- load file into memo
-
-- use cheerio to select all <pre> elements
-- for each pre element
-  - get innerText and replace newlines with '\n' characters
-
-- write intermediary file, keep changes in memo
-
-*/
-
-const cheerio = require('cheerio')
-const fs = require('fs')
-
-const $ = cheerio.load(fs.readFileSync('src/parseData/pre-elements.html'))
-
-const preElementHandles = $('pre')
-preElementHandles.each((_, element) => {
-  const newLineEncodedPreText = $(element).text().split('\n').join('\\n')
-  $(element).text(newLineEncodedPreText)
-})
-
-const slackHTMLDataWithNewLineEncodedPreText = $.html()
-
-fs.writeFileSync('src/parseData/pre-elements.newline-encoded-pre-elements.html', slackHTMLDataWithNewLineEncodedPreText)
-
-/*
-
-iterate over each line:
-  - verify valid HTML element
-  - verify is either date divider line, post or thread
-  - filter out any line that doesn't pass check
-
-*/
-
-/*
-
-group posts and threads by date
-
-*/
-
-/*
-
-iterate over date groups:
-  - if post,   parse post into json
-  - if thread, parse thread into json
-
-*/
+parseHTML()
