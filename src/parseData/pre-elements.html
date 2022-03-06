@@ -1,0 +1,30 @@
+<div>
+  <code data-stringify-type="code" class="c-mrkdwn__code">console.clear()</code>
+  are not inside of your main “while” loop inside of the game. That means they don’t get called in the correct
+  order.&nbsp; If you put it in the following location in your code, it should work:<span
+    class="c-mrkdwn__br"
+    data-stringify-type="paragraph-break"
+  ></span>
+  <pre class="c-mrkdwn__pre" data-stringify-type="pre">
+while (true) {
+
+  prompt(`Choose one: ${CHOICES.join(', ')}`);
+  let choice = readline.question().toLowerCase();
+  console.clear();</pre
+  >
+</div>
+<div>
+  <code data-stringify-type="code" class="c-mrkdwn__code">console.clear()</code>
+  are not inside of your main “while” loop inside of the game. That means they don’t get called in the correct
+  order.&nbsp; If you put it in the following location in your code, it should work:<span
+    class="c-mrkdwn__br"
+    data-stringify-type="paragraph-break"
+  ></span>
+  <pre class="c-mrkdwn__pre" data-stringify-type="pre">
+while (true) {
+
+  prompt(`Choose one: ${CHOICES.join(', ')}`);
+  let choice = readline.question().toLowerCase();
+  console.clear();</pre
+  >
+</div>

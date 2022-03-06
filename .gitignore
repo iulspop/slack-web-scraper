@@ -6,3 +6,4 @@ screenshot.png
 exampleData/
 slack-data/
 parse-data/
+*.newline-encoded-pre-elements.html

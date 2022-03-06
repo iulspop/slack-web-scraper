@@ -1,7 +1,8 @@
 {
   "scripts": {
     "test:watch": "jest --watch",
-    "collect": "node src/collectData/collectData.js"
+    "collect": "node src/collectData/collectData.js",
+    "parse": "node src/parseData/parseData.js"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
