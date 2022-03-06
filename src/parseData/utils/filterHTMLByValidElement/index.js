@@ -25,7 +25,7 @@ function filterHTMLByValidElement(html) {
 
 const isValidPost = html => {
   const $ = cheerio.load(html)
-  const loadedCheerio = $('[aria-roledescription="message"]')
+  const loadedCheerio = $('[data-qa="message-text"]')
   return loadedCheerio.length === 1
 }
 

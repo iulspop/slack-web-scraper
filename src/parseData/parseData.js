@@ -3,8 +3,9 @@ const { pipe } = require('./utils/pipe')
 const { encodeNewlinePreElements } = require('./utils/encodeNewlinePreElements')
 const { filterHTMLByValidElement } = require('./utils/filterHTMLByValidElement')
 const { groupByDate } = require('./utils/groupByDate')
+const { parsePostsToJson } = require('./utils/parsePostsToJson')
 
-const filePath = 'slack-data/2022-03-05-17-52-34.html'
+const filePath = 'src/parseData/utils/parsePostsToJson/date-post-thread-elements.html'
 const file = File(filePath)
 
 const parseHTML = pipe(
@@ -14,9 +15,9 @@ const parseHTML = pipe(
   filterHTMLByValidElement,
   file.saveNewWithExtension('.1-filter-unexpected-elements.html'),
   groupByDate,
-  file.saveNewWithExtension('.2-group-by-date.json')
-  // parsePostsToJson,
-  // file.saveNewWithExtension('.json')
+  file.saveNewWithExtension('.2-group-by-date.json'),
+  parsePostsToJson,
+  file.saveNewWithExtension('.3-parsed-posts.json')
 )
 
 parseHTML()

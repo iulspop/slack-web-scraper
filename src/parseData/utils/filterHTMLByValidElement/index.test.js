@@ -20,6 +20,11 @@ describe('isValidPost()', () => {
     const invalidPost = ''
     expect(isValidPost(invalidPost)).toBe(false)
   })
+
+  it('returns false when post invalid', () => {
+    const invalidPost = loadTestFile(__dirname, './invalid-post.html')
+    expect(isValidPost(invalidPost)).toBe(false)
+  })
 })
 
 describe('isValidThread()', () => {
