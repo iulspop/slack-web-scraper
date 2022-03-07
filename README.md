@@ -36,10 +36,10 @@ Either set `CHANNEL_FEED_NAME` or alernatively `CONVERSATION_NAME`.
 
 3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `launchBrowser.js` to run the scraper in headless mode.
 
+### Tip for collecting data with Windows Subsystem for Linux
+
+You need to configure WSL to connect to a GUI even if the browser launches in headless mode. Use [this guide](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress) to configure a WSL to connect to an X-server installed on Windows. The X-Server must be open and WSL must be able to connect before running the collect script or it will not work.
+
 ## How to parse Slack data?
 
 1. Assuming you already ran `npm run collect`, you can now run `npm run parse`. Enter the file path to the HTML file of data scraped from Slack. Once started, the parsing script will outpout files representating intermediary parsing steps, until it reaches the last parsing step and output `*.3-parsed-posts.json`.
-
-### Note for WSL users
-
-You will need configure WSL to run GUI interfaces even if the browser launches in headless mode. Use [this guide](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress) to configure an X-server for running your display from Windows. Make sure to have it open before trying to start Puppeteer or it will not work.
