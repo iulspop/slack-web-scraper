@@ -1,14 +1,12 @@
 # Slack Web Scraper
 
-## What is it?
+A web scraper that navigates to a Slack workspace and save the posts and threads of a given channel or conversation.
 
-A web scraper that navigates to a Slack workspace and save the posts and threads of a given channel feed.
+It uses [Puppeteer headless browser](https://puppeteer.github.io/puppeteer/) for loading and interacting with Slack. It doesn't depend on installing an app in the Slack workspace or aquiring an API key. Instead, it logins to your Slack account and uses that to access the channel or conversation.
 
-It uses [Puppeteer headless browser](https://puppeteer.github.io/puppeteer/) for loading and interacting with Slack. It doesn't depend on installing an app in the Slack workspace. Instead, it logins to your Slack account and uses that to access the channel feed.
+It's helpful for saving information from a channel without needing to ask a workspace administrator to export the data.
 
-It can be helpful for saving information from a channel without needing to ask a workspace administrator to export the data.
-
-## How to collect the data?
+## How to collect Slack data?
 
 1. Run `npm install` to install the dependencies.
 2. Configure a `.env` file in the project root folder. The following environment variables can be set:
@@ -38,14 +36,10 @@ Either set `CHANNEL_FEED_NAME` or alernatively `CONVERSATION_NAME`.
 
 3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `launchBrowser.js` to run the scraper in headless mode.
 
-## How to parse the Data?
+## How to parse Slack data?
 
-Once the scraper has reached the top of the channel and collected all the data, it will close the browser. There will be a file output called `raw.html` in the project directory.
+1. Assuming you already ran `npm run collect`, you can now run `npm run parse`. Enter the file path to the HTML file of data scraped from Slack. Once started, the parsing script will outpout files representating intermediary parsing steps, until it reaches the last parsing step and output `*.3-parsed-posts.json`.
 
-`raw.html` contains the HTML for the posts and threads saved from the Slack channel. A post is a single post with no replies. A thread is a post and all its replies. Each post or thread is saved on one line. A post can be by a Slack Bot or user or the day divider line that marks the day.
-
-Once the data is collected, you will need to parse the HTML. The `parse-data` folder contains scripts for parsing the HTML for a specific case. Some functions and their tests can be reused for other cases, like `countUniqueSenders`, `filterBySender`, `groupByDate`, `groupByMonth`. These can be used to manipulate the HTML data. Note that they depend on how the Slack app is implemented. If the class names for certain elements change, then the functions may not work as expected.
-
-## Note for WSL users
+### Note for WSL users
 
 You will need configure WSL to run GUI interfaces even if the browser launches in headless mode. Use [this guide](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress) to configure an X-server for running your display from Windows. Make sure to have it open before trying to start Puppeteer or it will not work.
