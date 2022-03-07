@@ -38,7 +38,7 @@ Either set `CHANNEL_FEED_NAME` or alernatively `CONVERSATION_NAME`.
 
 ### Tip for collecting data with Windows Subsystem for Linux
 
-You need to configure WSL to connect to a GUI even if the browser launches in headless mode. Use [this guide](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress) to configure a WSL to connect to an X-server installed on Windows. The X-Server must be open and WSL must be able to connect before running the collect script or it will not work.
+You need to configure WSL to connect to a GUI even if the browser launches in headless mode. Use [this guide](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress) to configure WSL to connect to an X server installed on Windows. Before running the collect script, the X server must be open and WSL correctly configured to connect to it, or Puppeteer will fail to launch the browser.
 
 ## How to parse Slack data?
 
