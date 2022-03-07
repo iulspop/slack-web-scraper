@@ -46,14 +46,6 @@ Once the scraper has reached the top of the channel and collected all the data, 
 
 Once the data is collected, you will need to parse the HTML. The `parse-data` folder contains scripts for parsing the HTML for a specific case. Some functions and their tests can be reused for other cases, like `countUniqueSenders`, `filterBySender`, `groupByDate`, `groupByMonth`. These can be used to manipulate the HTML data. Note that they depend on how the Slack app is implemented. If the class names for certain elements change, then the functions may not work as expected.
 
-## How does it work?
-
-`collectData.js` starts the headless browser, scrapes Slack and saves the data to `raw.html`. It's configured to save each post & thread in a channel starting from the most recent, scrolling all the way up to the top of the feed until there are no more posts loaded.
-
-## Background
-
-This tool was developed to help moderators of a study community have a pulse on the health of a community by answering common questions like how many people are active, which courses are most popular. We did that through collecting data from the Slack channel where people organized study groups and parsing it.
-
 ## Note for WSL users
 
 You will need configure WSL to run GUI interfaces even if the browser launches in headless mode. Use [this guide](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress) to configure an X-server for running your display from Windows. Make sure to have it open before trying to start Puppeteer or it will not work.
