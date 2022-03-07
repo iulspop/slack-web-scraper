@@ -8,6 +8,7 @@ function File(filePath) {
     saveNewWithExtension: extension => data => {
       filePathWithoutExtension = filePath.replace(/\.[^/.]+$/, '')
       fs.writeFileSync(filePathWithoutExtension + extension, data)
+      console.log('Wrote', filePathWithoutExtension + extension)
       return data
     },
   }
