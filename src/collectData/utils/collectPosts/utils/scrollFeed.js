@@ -1,4 +1,4 @@
-const SCROLL_UP_TIMEOUT = process.env.SCROLL_UP_TIMEOUT
+const SCROLL_UP_TIMEOUT = Number(process.env.SCROLL_UP_TIMEOUT)
 
 async function ScrollFeed(page, channelFeedSelector) {
   const channelFeedHandle = await page.waitForSelector(channelFeedSelector)
@@ -9,7 +9,10 @@ async function ScrollFeed(page, channelFeedSelector) {
       do {
         await onScrollCallback()
         await this.up()
-        if (SCROLL_UP_TIMEOUT && differenceInSeconds(startTime, new Date()) > SCROLL_UP_TIMEOUT) break
+        if (SCROLL_UP_TIMEOUT && differenceInSeconds(startTime, new Date()) >= SCROLL_UP_TIMEOUT) {
+          console.log(`Scroll up timed out after ${differenceInSeconds(startTime, new Date())} seconds`)
+          break
+        }
       } while (!(await this.isScrolledToTop()))
     },
     async toBottom(onScrollCallback = async () => {}) {
