@@ -5,9 +5,9 @@ function parsePostsToJson(dateGroupsJSON) {
   const dateGroups = JSON.parse(dateGroupsJSON)
 
   const dateGroupsWithParsedPosts = dateGroups.map(dateGroup => {
-    const parsedPosts = dateGroup.posts.map(post => {
-      if (isValidPost(post)) return parsePost(post)
-      if (isValidThread(post)) return parseThread(post)
+    const parsedPosts = dateGroup.posts.map(html => {
+      if (isValidPost(html)) return parsePost(html)
+      if (isValidThread(html)) return parseThread(html)
     })
     return { ...dateGroup, posts: parsedPosts }
   })
@@ -15,15 +15,26 @@ function parsePostsToJson(dateGroupsJSON) {
   return JSON.stringify(dateGroupsWithParsedPosts)
 }
 
-function parsePost(post) {
-  const $ = cheerio.load(post)
-  const time = $('.c-timestamp')
-    .attr('data-stringify-text')
-    .replace(/[\[\]]/g, '')
-  const sender = $('.c-message__sender_link').text()
-  const text = $('.p-rich_text_section').html().trim()
-
-  return Post(time, sender, text)
+function parsePost(html) {
+  const $ = cheerio.load(html)
+  try {
+    const time = $('.c-timestamp')
+      .attr('data-stringify-text')
+      .replace(/[\[\]]/g, '')
+    const sender = $('.c-message__sender_link').text()
+    const text = $('.p-rich_text_section').html().trim()
+    return Post(time, sender, text)
+  } catch (error) {
+    console.log('\nParsing a post failed. Replacing post with placeholder.')
+    console.log('Please create an issue at this URL: https://github.com/iulspop/slack-web-scraper/issues/new')
+    console.log(
+      'Title the issue "Parsing Error" and add the following HTML & error message to help us improve parsing:'
+    )
+    console.log($.html())
+    console.error(error)
+    console.log('\nParsing a post failed, so replaced it with placeholder instead. See message above.')
+    return Post()
+  }
 }
 
 function parseThread(thread) {
@@ -33,18 +44,18 @@ function parseThread(thread) {
   $('[aria-label^="Thread"]')
     .children()
     .has('[aria-roledescription="message"]')
-    .each((_, post) => {
+    .each((_, postCheerioElement) => {
       if (!firstPost) {
-        firstPost = parsePost(post)
+        firstPost = parsePost($(postCheerioElement).html())
       } else {
-        firstPost.replies.push(parsePost(post))
+        firstPost.replies.push(parsePost($(postCheerioElement).html()))
       }
     })
 
   return firstPost
 }
 
-function Post(time, sender, text, replies = []) {
+function Post(time = '', sender = '', text = 'Placeholder Post', replies = []) {
   return {
     time,
     sender,
