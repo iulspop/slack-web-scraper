@@ -1,9 +1,7 @@
 const { isValidPost, isValidThread } = require('../filterHTMLByValidElement')
 const cheerio = require('cheerio')
 
-function parsePostsToJson(dateGroupsJSON) {
-  const dateGroups = JSON.parse(dateGroupsJSON)
-
+function parsePostsToJson(dateGroups) {
   const dateGroupsWithParsedPosts = dateGroups.map(dateGroup => {
     const parsedPosts = dateGroup.posts.map(html => {
       if (isValidPost(html)) return parsePost(html)
@@ -12,7 +10,7 @@ function parsePostsToJson(dateGroupsJSON) {
     return { ...dateGroup, posts: parsedPosts }
   })
 
-  return JSON.stringify(dateGroupsWithParsedPosts)
+  return dateGroupsWithParsedPosts
 }
 
 function parsePost(html) {

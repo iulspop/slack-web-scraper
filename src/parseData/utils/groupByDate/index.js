@@ -16,7 +16,7 @@ function groupByDate(html) {
     }
   })
 
-  return JSON.stringify(dateGroups)
+  return dateGroups
 }
 
 function DateGroup(date) {

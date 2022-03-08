@@ -4,7 +4,7 @@ const { groupByDate } = require('./index')
 describe('groupByDate', () => {
   it('Group HTML by date', () => {
     let dateGroups = groupByDate(loadTestFile(__dirname, './group-by-date.html'))
-    expect(JSON.parse(dateGroups)).toEqual([
+    expect(dateGroups).toEqual([
       {
         timestamp: 'Mon, 29 Aug 2022 04:00:00 GMT',
         date: 'Monday, August 30th',
