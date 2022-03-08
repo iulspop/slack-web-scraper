@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { promptFileToParse } = require('./utils/promptFileToParse')
 const { FileUtils } = require('./utils/FileUtils')
 const { pipe } = require('./utils/pipe')

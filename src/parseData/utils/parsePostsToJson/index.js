@@ -1,6 +1,8 @@
 const { isValidPost, isValidThread } = require('../filterHTMLByValidElement')
 const cheerio = require('cheerio')
 
+const DEBUG_MODE = process.env.DEBUG_MODE || 'FALSE'
+
 function parsePostsToJson(dateGroups) {
   const dateGroupsWithParsedPosts = dateGroups.map(dateGroup => {
     const parsedPosts = dateGroup.posts.map(html => {
@@ -23,15 +25,17 @@ function parsePost(html) {
     const text = $('.p-rich_text_section').html().trim()
     return Post(time, sender, text)
   } catch (error) {
-    console.log('\n###### Error ######\n')
-    console.error(error)
-    console.log('\n###### HTML Element ######\n')
-    console.log($.html())
-    console.log('\nParsing post failed. Replacing post with placeholder.')
-    console.log('Please create an issue at this URL: https://github.com/iulspop/slack-web-scraper/issues/new')
-    console.log(
-      'Title the issue "Parsing Error" and add the above HTML element & error message to help us improve parsing.\n'
-    )
+    if (DEBUG_MODE === 'TRUE') {
+      console.log('\n###### Error ######\n')
+      console.error(error)
+      console.log('\n###### HTML Element ######\n')
+      console.log($.html())
+      console.log('\nParsing post failed. Replacing post with placeholder.')
+      console.log('Please create an issue at this URL: https://github.com/iulspop/slack-web-scraper/issues/new')
+      console.log(
+        'Title the issue "Parsing Error" and add the above HTML element & error message to help us improve parsing.\n'
+      )
+    }
     return Post()
   }
 }
