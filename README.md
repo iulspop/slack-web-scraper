@@ -1,10 +1,12 @@
 # Slack Web Scraper
 
-A web scraper that navigates to a Slack workspace and save the posts and threads of a given channel or conversation.
+A web scraper that navigates to a Slack workspace and saves the posts and threads of a given channel or DM.
 
-It uses [Puppeteer headless browser](https://puppeteer.github.io/puppeteer/) for loading and interacting with Slack. It doesn't depend on installing an app in the Slack workspace or aquiring an API key. Instead, it logins to your Slack account and uses that to access the channel or conversation.
+It uses [Puppeteer headless browser](https://puppeteer.github.io/puppeteer/) for loading and interacting with Slack. It doesn't depend on installing an app in the Slack workspace or aquiring an API key. Instead, it logins to your Slack account and uses that to access the channel or DM.
 
-It's helpful for saving information from a channel without needing to ask a workspace administrator to export the data.
+It's helpful for saving information from a channel or DM without needing to ask a workspace administrator to export the data.
+
+For example, if you're in the process of leaving your current company to join another, this tool is a great way to archive everything you've said and done on Slack.
 
 ## How to collect Slack data?
 
