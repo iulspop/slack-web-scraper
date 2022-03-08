@@ -32,10 +32,10 @@ function parsePost(html) {
       console.log('\n###### HTML Element ######\n')
       console.log($.html())
       console.log('\nParsing post failed. Replacing post with placeholder.')
-      console.log('Please create an issue at this URL: https://github.com/iulspop/slack-web-scraper/issues/new')
       console.log(
-        'Title the issue "Parsing Error" and add the above HTML element & error message to help us improve parsing.\n'
+        'Please create an issue to help us improve parsing: https://github.com/iulspop/slack-web-scraper/issues/new'
       )
+      console.log('Title the issue "Parsing Error" and add the HTML element & error above.\n')
     }
     return Post()
   }
