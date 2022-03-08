@@ -23,14 +23,15 @@ function parsePost(html) {
     const text = $('.p-rich_text_section').html().trim()
     return Post(time, sender, text)
   } catch (error) {
-    console.log('\nParsing a post failed. Replacing post with placeholder.')
+    console.log('\n###### Error ######\n')
+    console.error(error)
+    console.log('\n###### HTML Element ######\n')
+    console.log($.html())
+    console.log('\nParsing post failed. Replacing post with placeholder.')
     console.log('Please create an issue at this URL: https://github.com/iulspop/slack-web-scraper/issues/new')
     console.log(
-      'Title the issue "Parsing Error" and add the following HTML & error message to help us improve parsing:'
+      'Title the issue "Parsing Error" and add the above HTML element & error message to help us improve parsing.\n'
     )
-    console.log($.html())
-    console.error(error)
-    console.log('\nParsing a post failed, so replaced it with placeholder instead. See message above.')
     return Post()
   }
 }
