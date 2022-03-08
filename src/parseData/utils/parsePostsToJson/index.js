@@ -1,7 +1,8 @@
+const { isDebugMode } = require('../isDebugMode')
 const { isValidPost, isValidThread } = require('../filterHTMLByValidElement')
 const cheerio = require('cheerio')
 
-const DEBUG_MODE = process.env.DEBUG_MODE || 'FALSE'
+const DEBUG_MODE = isDebugMode()
 
 function parsePostsToJson(dateGroups) {
   const dateGroupsWithParsedPosts = dateGroups.map(dateGroup => {
@@ -25,7 +26,7 @@ function parsePost(html) {
     const text = $('.p-rich_text_section').html().trim()
     return Post(time, sender, text)
   } catch (error) {
-    if (DEBUG_MODE === 'TRUE') {
+    if (DEBUG_MODE) {
       console.log('\n###### Error ######\n')
       console.error(error)
       console.log('\n###### HTML Element ######\n')
