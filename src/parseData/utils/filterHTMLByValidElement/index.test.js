@@ -22,7 +22,7 @@ describe('isValidPost()', () => {
   })
 
   it('returns false when post invalid', () => {
-    const invalidPost = loadTestFile(__dirname, './invalid-post.html')
+    const invalidPost = loadTestFile(__dirname, './invalid-post-1.html')
     expect(isValidPost(invalidPost)).toBe(false)
   })
 })
