@@ -13,12 +13,14 @@ function FileUtils(filePath) {
     },
     saveNewFileWithExtension: extension => text => {
       const newFilePath = replaceFilePathExtension(extension)
-      fs.writeFile(newFilePath, text, () => console.log('Wrote', newFilePath))
+      fs.writeFileSync(newFilePath, text)
+      console.log('Wrote', newFilePath)
       return text
     },
     saveNewJSONFileWithExtension: extension => object => {
       const newFilePath = replaceFilePathExtension(extension)
-      jsonfile.writeFile(newFilePath, object, { spaces: 2 }).then(() => console.log('Wrote', newFilePath))
+      jsonfile.writeFileSync(newFilePath, object, { spaces: 2 })
+      console.log('Wrote', newFilePath)
       return object
     },
   }
