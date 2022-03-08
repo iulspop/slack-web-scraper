@@ -1,7 +1,5 @@
 async function gotoChannel(page) {
-  let channelName = process.env.CHANNEL_FEED_NAME
-  if (process.env.CONVERSATION_NAME) channelName = process.env.CONVERSATION_NAME
-
+  let channelName = process.env.CHANNEL_FEED_NAME || process.env.CONVERSATION_NAME
   let channels = await page.$$('.p-channel_sidebar__name')
   let [channelButton] = await filterByText(page, channels, channelName)
   await channelButton.click()
