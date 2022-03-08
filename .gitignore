@@ -1,11 +1,8 @@
 node_modules/*
 .env
-slack-session-cookies.json
-raw.html
-screenshot.png
+cookies/
 exampleData/
 slack-data/
-parse-data/
 *.0-newline-encoded-pre-elements.html
 *.1-filter-unexpected-elements.html
 *.2-group-by-date.json
