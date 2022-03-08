@@ -7,19 +7,6 @@ function filterHTMLByValidElement(html) {
     html => isValidPost(html) || isValidThread(html) || isValidDateDividerLine(html)
   )
 
-  /*
-  ENABLE WHEN DEBUGGING
-  const newHTMLLines = htmlLines.filter(html => {
-    const isValid = isValidPost(html) || isValidThread(html) || isValidDateDividerLine(html)
-    if (isValid) {
-      return true
-    } else {
-      console.log('The following invalid HTML was filtered:', html)
-      return false
-    }
-  })
-  */
-
   return newHTMLLines.join('\n')
 }
 
