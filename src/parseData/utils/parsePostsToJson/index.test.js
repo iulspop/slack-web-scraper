@@ -18,7 +18,7 @@ describe('parsePostsToJson()', () => {
           {
             time: '5:54 PM',
             sender: 'John Doe 2',
-            text: 'Thanks <span dir="ltr" delay="150" data-sk="tooltip_parent"><a class="c-link c-member_slug c-member_slug--light c-member_slug--link " data-member-id="U01UN68MH2N" data-member-label="@Mary Jane" data-stringify-type="mention" data-stringify-id="U01UN68MH2N" data-stringify-label="@Mary Jane" tabindex="0" aria-hidden="false" aria-haspopup="menu" aria-expanded="false" href="https://launchschool.slack.com/team/U01UN68MH2N" rel="noopener noreferrer">@Mary Jane</a></span> for putting this together and hello to everyone! Quick question has anyone officially been accepted or are we all still waiting one that?',
+            text: 'Thanks <span dir="ltr" delay="150" data-sk="tooltip_parent"><a class="c-link c-member_slug c-member_slug--light c-member_slug--link " data-member-id="U01UN68MH2N" data-member-label="@Mary Jane" data-stringify-type="mention" data-stringify-id="U01UN68MH2N" data-stringify-label="@Mary Jane" tabindex="0" aria-hidden="false" aria-haspopup="menu" aria-expanded="false" href="x.com">@Mary Jane</a></span> for putting this together and hello to everyone! Quick question has anyone officially been accepted or are we all still waiting one that?',
             replies: [
               {
                 time: '5:57 PM',
