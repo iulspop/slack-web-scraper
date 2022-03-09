@@ -40,7 +40,11 @@ async function createSlackDataFile({ type, name }) {
 const appendHTMLToSlackDataFile = filePath => postsHTML => {
   fs.appendFile(filePath, postsHTML.join('\n'))
     .then(() => {
-      console.log('Appended HTML data to Slack data file.')
+      const currentTime = new Date()
+      const timestamp = `${currentTime.getHours()}:${currentTime.getMinutes()} ${
+        currentTime.getHours() >= 12 ? 'PM' : 'AM'
+      }`
+      console.log(`Appended HTML data to Slack data file. ${timestamp}`)
     })
     .catch(error => {
       console.log('Failed to append HTML data to Slack data file.')

@@ -6,6 +6,7 @@ async function ScrollFeed(page, channelFeedSelector) {
   return {
     async toTop(onScrollCallback = async () => {}) {
       const startTime = new Date()
+      console.log('Scrolling to top...', getHoursAndMinutesTimestamp())
       do {
         await onScrollCallback()
         await this.up()
@@ -14,6 +15,7 @@ async function ScrollFeed(page, channelFeedSelector) {
           break
         }
       } while (!(await this.isScrolledToTop()))
+      console.log('Scrolled to top.', getHoursAndMinutesTimestamp())
     },
     async toBottom(onScrollCallback = async () => {}) {
       do {
@@ -23,12 +25,12 @@ async function ScrollFeed(page, channelFeedSelector) {
     },
     async up() {
       await page.hover(channelFeedSelector)
-      await page.mouse.wheel({ deltaY: -50000 })
+      await page.mouse.wheel({ deltaY: -6000 })
       await page.waitForNetworkIdle()
     },
     async down() {
       await page.hover(channelFeedSelector)
-      await page.mouse.wheel({ deltaY: 8000 })
+      await page.mouse.wheel({ deltaY: 4000 })
       await page.waitForNetworkIdle()
     },
     async isScrolledToTop() {
@@ -43,6 +45,11 @@ async function ScrollFeed(page, channelFeedSelector) {
 
 function differenceInSeconds(startTime, endTime) {
   return Math.floor((endTime - startTime) / 1000)
+}
+
+function getHoursAndMinutesTimestamp() {
+  const currentTime = new Date()
+  return `${currentTime.getHours()}:${currentTime.getMinutes()} ${currentTime.getHours() >= 12 ? 'PM' : 'AM'}`
 }
 
 exports.ScrollFeed = ScrollFeed

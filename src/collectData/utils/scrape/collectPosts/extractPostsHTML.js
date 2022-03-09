@@ -20,8 +20,7 @@ async function extractPostsHTML(page, postsSelector) {
         postsHTML.push(postHTML)
       }
     } catch (error) {
-      console.error(error)
-      console.log('Error scraping post. Skipping.', i)
+      console.error(`Error scraping post. Skipping this post. Index: ${i}. Error: ${error.message}.`)
       continue
     }
 

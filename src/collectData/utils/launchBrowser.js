@@ -7,7 +7,7 @@ async function launchBrowser() {
   if (HEADLESS_MODE) {
     options = {
       headless: true,
-      defaultViewport: { height: 4000, width: 1463 },
+      defaultViewport: { height: 6000, width: 1463 },
     }
   } else {
     options = {

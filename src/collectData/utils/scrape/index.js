@@ -25,7 +25,7 @@ async function scrape(page, names, type) {
       console.error(error.message, 'Skipping scrape.')
       continue
     }
-    if (HEADLESS_MODE) console.log(`Started scraping '${name}' ${type}.`)
+    if (HEADLESS_MODE) console.log(`\nStarted scraping '${name}' ${type}.`)
     await collectPosts(page, { type, name })
   }
 }
