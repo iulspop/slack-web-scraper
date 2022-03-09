@@ -45,6 +45,14 @@ You need to configure WSL to connect to a GUI even if the browser launches in he
 
 To contribute to this project, please open an issue describing the features you want to add or code you want to change. Then we can discuss those changes before assigning someone to complete the task.
 
+## License
+
+[MIT][license]
+
+<!-- Links -->
+
+[license]: https://github.com/iulspop/slack-web-scraper/blob/master/LICENSE.md
+
 <!-- Demo images -->
 
 [slack_messages_to_parsed_posts]: https://github.com/iulspop/slack-web-scraper/blob/master/docs/images/slack-messages-to-parsed-posts.jpg?raw=true
