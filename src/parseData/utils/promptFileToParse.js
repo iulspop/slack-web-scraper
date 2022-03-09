@@ -12,7 +12,8 @@ async function promptFileToParse() {
 async function getDefaultFilePath() {
   try {
     const fileList = await fs.readdir(SLACK_DATA_FOLDER_PATH)
-    const mostRecentScrapedDataFile = fileList[fileList.length - 1]
+    const htmlFileList = fileList.filter(filePath => filePath.match(/\.html$/))
+    const mostRecentScrapedDataFile = htmlFileList[htmlFileList.length - 1]
     return SLACK_DATA_FOLDER_PATH + mostRecentScrapedDataFile
   } catch (error) {
     console.log("Couldn't load scraped data file list from directory:", SLACK_DATA_FOLDER_PATH)
