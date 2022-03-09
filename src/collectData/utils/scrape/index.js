@@ -17,7 +17,12 @@ async function scrapeChannels(page) {
 async function scrape(page, names, type) {
   for (let i = 0; i < names.length; i++) {
     const name = names[i]
-    await gotoChannel(page, name)
+    try {
+      await gotoChannel(page, type, name)
+    } catch (error) {
+      console.error(error.message, 'Skipping scrape.')
+      continue
+    }
     await collectPosts(page, { type, name })
   }
 }

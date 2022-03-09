@@ -1,6 +1,9 @@
-async function gotoChannel(page, name) {
+async function gotoChannel(page, type, name) {
   let channels = await page.$$('.p-channel_sidebar__name')
   let [channelButton] = await filterByText(page, channels, name)
+  if (!channelButton) {
+    throw new Error(`${type} '${name}' not found. Did you make a typo in the .env file?`)
+  }
   await channelButton.click()
   await channelButton.click()
 }
