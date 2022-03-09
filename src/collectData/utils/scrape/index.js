@@ -4,11 +4,13 @@ const { collectPosts } = require('./collectPosts')
 
 async function scrapeConversations(page) {
   const conversationNames = parseNames(process.env.CONVERSATION_NAMES)
+  if (conversationNames.length === 0) console.log('No conversations names found. Skipping conversations scrape.')
   await scrape(page, conversationNames, 'DM')
 }
 
 async function scrapeChannels(page) {
   const channelNames = parseNames(process.env.CHANNEL_NAMES)
+  if (channelNames.length === 0) console.log('No channels names found. Skipping channels scrape.')
   await scrape(page, channelNames, 'Channel')
 }
 
