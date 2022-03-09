@@ -27,7 +27,9 @@ For example, if you're in the process of leaving your current company to join an
 
   - A timeout in seconds for when to stop scrolling up the channel history and start scraping posts. Useful when scraping channels with a long history but don't need to scrape it all. For a very active channel, it could take 60 seconds to scroll up half a year then ~20min to scrape it. Example: `SCROLL_UP_TIMEOUT=30`
 
-3. Run `npm run collect`. You will see the browser open and start scraping data. By default the browser is configured to not run in headless mode, you can change the `options` object in `launchBrowser.js` to run the scraper in headless mode.
+- `HEADLESS_MODE` is optional. Set to `true` to scrape with the browser in headless mode. Example: `HEADLESS_MODE=true`. Helpful for scraping long channel/conversation histories, since the browser runs with a larger vertical viewport so can scrape it larger batches at a time. I recommend you start without running headless mode with one conversation or channel since you can see clearer if the collect scraper is working or not.
+
+3. Run `npm run collect`. You will see the browser open and start scraping data unless you set `HEADLESS_MODE` to `true`. In headless mode you will see status updates on the scraping process in the console output.
 
 ### Tip for collecting data with Windows Subsystem for Linux
 

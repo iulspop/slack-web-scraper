@@ -2,6 +2,8 @@ const { parseNames } = require('./parseNames')
 const { gotoChannel } = require('./gotoChannel')
 const { collectPosts } = require('./collectPosts')
 
+const HEADLESS_MODE = process.env.HEADLESS_MODE === 'true'
+
 async function scrapeConversations(page) {
   const conversationNames = parseNames(process.env.CONVERSATION_NAMES)
   if (conversationNames.length === 0) console.log('No conversations names found. Skipping conversations scrape.')
@@ -23,6 +25,7 @@ async function scrape(page, names, type) {
       console.error(error.message, 'Skipping scrape.')
       continue
     }
+    if (HEADLESS_MODE) console.log(`Started scraping '${name}' ${type}.`)
     await collectPosts(page, { type, name })
   }
 }
