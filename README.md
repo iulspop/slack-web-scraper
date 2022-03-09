@@ -1,5 +1,7 @@
 # Slack Web Scraper
 
+![][slack_messages_to_parsed_posts]
+
 A web scraper that navigates to a Slack workspace and saves the posts and threads of a given channel or DM.
 
 It uses [Puppeteer headless browser](https://puppeteer.github.io/puppeteer/) for loading and interacting with Slack. It doesn't depend on installing an app in the Slack workspace or aquiring an API key. Instead, it logins to your Slack account and uses that to access the channel or DM.
@@ -38,3 +40,7 @@ You need to configure WSL to connect to a GUI even if the browser launches in he
 ## How to parse Slack data?
 
 1. Assuming you already ran `npm run collect`, you can now run `npm run parse`. Enter the file path to the HTML file of data scraped from Slack. Once started, the parsing script will output files representating intermediary parsing steps, until it reaches the last parsing step and output `*.3-parsed-posts.json`.
+
+<!-- Demo images -->
+
+[slack_messages_to_parsed_posts]: https://github.com/iulspop/slack-web-scraper/blob/master/docs/images/slack-messages-to-parsed-posts.jpg?raw=true
