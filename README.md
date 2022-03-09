@@ -39,7 +39,7 @@ You need to configure WSL to connect to a GUI even if the browser launches in he
 
 ## How to parse Slack data?
 
-1. Assuming you already ran `npm run collect`, you can now run `npm run parse`. Enter the file path to the HTML file of data scraped from Slack. Once started, the parsing script will output files representating intermediary parsing steps, until it reaches the last parsing step and output `*.3-parsed-posts.json`.
+1. Assuming you already ran `npm run collect`, you can now run `npm run parse`. You will be prompted to select the file to parse from the `slack-data/` folder. Once the parsing is complete, a `slack-data/x.json` file with same name as the source HTML file will be output with the parsed posts/threads.
 
 ## Contributing
 
