@@ -7,8 +7,8 @@ const DEBUG_MODE = isDebugMode()
 function parsePostsToJson(dateGroups) {
   const dateGroupsWithParsedPosts = dateGroups.map(dateGroup => {
     const parsedPosts = dateGroup.posts.map(html => {
-      if (isValidPost(html)) return parsePost(html)
       if (isValidThread(html)) return parseThread(html)
+      if (isValidPost(html)) return parsePost(html)
     })
     return { ...dateGroup, posts: parsedPosts }
   })
