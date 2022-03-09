@@ -18,10 +18,10 @@ For example, if you're in the process of leaving your current company to join an
   - `SLACK_WORKSPACE_URL` must be the URL you login to the workspace not `app.slack.com`. Example: `SLACK_WORKSPACE_URL=cloud-native.slack.com`. Note environment variables are set without quotes.
   - `SLACK_EMAIL` and `SLACK_PASSWORD` are credentials used to login into the workspace.
 
-- Either set `CHANNEL_FEED_NAME` or alernatively `CONVERSATION_NAME`. If you set both, `CONVERSATION_NAME` is ignored.
+- You must set one of `CONVERSATION_NAMES` or `CHANNEL_FEED_NAMES` or both. The collect script will scrape the list of conversations first, then the list of channels. The list is "comma space" delimited: `, `.
 
-  - Set `CHANNEL_FEED_NAME` to scrape a public or private channel. It's name you see under "channels" side tab in Slack. Example: `CHANNEL_FEED_NAME=general`.
-  - Set `CONVERSATION_NAME` to scrape a DM or group chat. The value is the exact name tag of the person or group chat name as is written under "Direct Messages" in Slack. Example: `CONVERSATION_NAME=Iuliu Pop (Core Grad)`
+  - Set `CONVERSATION_NAMES` to scrape a DM or group chat. The value is the exact name tag of the person or group chat name as is written under "Direct Messages" in Slack. Example: `CONVERSATION_NAMES=Iuliu Pop (Core Grad), John Doe`
+  - Set `CHANNEL_FEED_NAMES` to scrape a public or private channels. It's the name you see under "channels" side tab in Slack. Example: `CHANNEL_FEED_NAME=general, random`.
 
 - `SCROLL_UP_TIMEOUT` is optional.
 

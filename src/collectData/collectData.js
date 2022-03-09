@@ -3,9 +3,9 @@ require('dotenv').config()
 const { recordScrapeDuration } = require('./utils/recordScrapeDuration')
 const { launchBrowser } = require('./utils/launchBrowser')
 const { loginToSlack } = require('./utils/loginToSlack')
-const { gotoChannel } = require('./utils/gotoChannel')
 const { gotoWorkspace } = require('./utils/gotoWorkspace')
-const { collectPosts } = require('./utils/collectPosts')
+const { throwErrorIfNoConversationOrChannel } = require('./utils/scrape/parseNames')
+const { scrapeConversations, scrapeChannels } = require('./utils/scrape')
 const { closeBrowser } = require('./utils/closeBrowser')
 
 ;(async () => {
@@ -14,9 +14,10 @@ const { closeBrowser } = require('./utils/closeBrowser')
 
   await loginToSlack(page)
   await gotoWorkspace(page)
-  await gotoChannel(page)
 
-  await collectPosts(page)
+  throwErrorIfNoConversationOrChannel()
+  await scrapeConversations(page)
+  await scrapeChannels(page)
 
   await closeBrowser(browser)
 })()

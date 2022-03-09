@@ -2,9 +2,9 @@ const fs = require('fs/promises')
 
 const SLACK_DATA_FOLDER_PATH = 'slack-data/'
 
-async function initSlackDataFile() {
+async function initSlackDataFile(info) {
   await createSlackDataFolder()
-  return await createSlackDataFile()
+  return await createSlackDataFile(info)
 }
 
 async function createSlackDataFolder() {
@@ -22,8 +22,8 @@ async function createSlackDataFolder() {
   }
 }
 
-async function createSlackDataFile() {
-  const filePath = SLACK_DATA_FOLDER_PATH + createTimestamp() + '.html'
+async function createSlackDataFile({ type, name }) {
+  const filePath = SLACK_DATA_FOLDER_PATH + type + '-' + name.replace(' ', '_') + '-' + createTimestamp() + '.html'
 
   try {
     const fileHandle = await fs.open(filePath, 'w')
