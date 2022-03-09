@@ -41,6 +41,10 @@ You need to configure WSL to connect to a GUI even if the browser launches in he
 
 1. Assuming you already ran `npm run collect`, you can now run `npm run parse`. Enter the file path to the HTML file of data scraped from Slack. Once started, the parsing script will output files representating intermediary parsing steps, until it reaches the last parsing step and output `*.3-parsed-posts.json`.
 
+## Contributing
+
+To contribute to this project, please open an issue describing the features you want to add or code you want to change. Then we can discuss those changes before assigning someone to complete the task.
+
 <!-- Demo images -->
 
 [slack_messages_to_parsed_posts]: https://github.com/iulspop/slack-web-scraper/blob/master/docs/images/slack-messages-to-parsed-posts.jpg?raw=true
