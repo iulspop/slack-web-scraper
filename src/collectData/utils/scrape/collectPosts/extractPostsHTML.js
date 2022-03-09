@@ -10,13 +10,19 @@ async function extractPostsHTML(page, postsSelector) {
 
     if (await postHandle.evaluate(post => post.isScraped)) continue
 
-    const repliesButton = await postHandle.$('.c-message__reply_count')
-    if (repliesButton) {
-      const threadHTML = await extractThreadHTML(repliesButton, page)
-      postsHTML.push(threadHTML)
-    } else {
-      const postHTML = await postHandle.evaluate(post => post.outerHTML)
-      postsHTML.push(postHTML)
+    try {
+      const repliesButton = await postHandle.$('.c-message__reply_count')
+      if (repliesButton) {
+        const threadHTML = await extractThreadHTML(repliesButton, page)
+        postsHTML.push(threadHTML)
+      } else {
+        const postHTML = await postHandle.evaluate(post => post.outerHTML)
+        postsHTML.push(postHTML)
+      }
+    } catch (error) {
+      console.error(error)
+      console.log('Error scraping post. Skipping.', i)
+      continue
     }
 
     await postHandle.evaluate(post => (post.isScraped = true))
