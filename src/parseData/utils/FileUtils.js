@@ -1,6 +1,9 @@
 const fs = require('fs')
 const jsonfile = require('jsonfile')
 
+const { isDebugMode } = require('./isDebugMode')
+const DEBUG_MODE = isDebugMode()
+
 function FileUtils(filePath) {
   const replaceFilePathExtension = extension => {
     const filePathWithoutExtension = filePath.replace(/\.[^/.]+$/, '')
@@ -10,6 +13,15 @@ function FileUtils(filePath) {
   return {
     readFile() {
       return fs.readFileSync(filePath)
+    },
+    leaveBreadcrumb(callback, debugCallback) {
+      return data => {
+        DEBUG_MODE ? debugCallback(data) : callback(data)
+        return data
+      }
+    },
+    message(message) {
+      return () => console.log(message)
     },
     saveNewFileWithExtension: extension => text => {
       const newFilePath = replaceFilePathExtension(extension)

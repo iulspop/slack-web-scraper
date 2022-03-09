@@ -9,18 +9,39 @@ const { groupByDate } = require('./utils/groupByDate')
 const { parsePostsToJson } = require('./utils/parsePostsToJson')
 
 promptFileToParse().then(filePath => {
-  const { readFile, saveNewFileWithExtension, saveNewJSONFileWithExtension } = FileUtils(filePath)
+  // prettier-ignore
+  const {
+    readFile,
+    leaveBreadcrumb,
+    message,
+    saveNewFileWithExtension,
+    saveNewJSONFileWithExtension,
+  } = FileUtils(filePath)
 
   const parseHTML = pipe(
     readFile,
     encodeNewlinePreElements,
-    saveNewFileWithExtension('.0-newline-encoded-pre-elements.html'),
+    leaveBreadcrumb(
+      message('Encoded newlines in pre elements.'),
+      saveNewFileWithExtension('.0-newline-encoded-pre-elements.html')
+    ),
     filterHTMLByValidElement,
-    saveNewFileWithExtension('.1-filter-unexpected-elements.html'),
+    leaveBreadcrumb(
+      message('Filtered unexpected elements.'),
+      saveNewFileWithExtension('.1-filter-unexpected-elements.html')
+    ),
     groupByDate,
-    saveNewJSONFileWithExtension('.2-group-by-date.json'),
+    // prettier-ignore
+    leaveBreadcrumb(
+      message('Grouped elements by date.'),
+      saveNewJSONFileWithExtension('.2-group-by-date.json')
+    ),
     parsePostsToJson,
-    saveNewJSONFileWithExtension('.3-parsed-posts.json')
+    // prettier-ignore
+    leaveBreadcrumb(
+      saveNewJSONFileWithExtension('.json'),
+      saveNewJSONFileWithExtension('.3-parsed-posts.json')
+    )
   )
 
   parseHTML()
