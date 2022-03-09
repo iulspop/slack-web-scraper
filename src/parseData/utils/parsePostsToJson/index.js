@@ -59,7 +59,7 @@ function parseThread(thread) {
   return firstPost
 }
 
-function Post(time = '', sender = '', text = 'Placeholder Post', replies = []) {
+function Post(time = '', sender = '', text = 'Placeholder Post (Means parsing failed for this post).', replies = []) {
   return {
     time,
     sender,
