@@ -22,8 +22,10 @@ For example, if you're in the process of leaving your current company to join an
 
 - You must set one of `CONVERSATION_NAMES` or `CHANNEL_NAMES` or both. The collect script will scrape the list of conversations first, then the list of channels. The list is "comma space" delimited: `, `.
 
-  - Set `CONVERSATION_NAMES` to scrape a DM or group chat. The value is the exact name tag of the person or group chat name as is written under "Direct Messages" in Slack. Example: `CONVERSATION_NAMES=Iuliu Pop (Core Grad), John Doe`
+  - Set `CONVERSATION_NAMES` to scrape a DM or group chat. The value is the name tag of the person or group chat name as is written under "Direct Messages" in Slack. Example: `CONVERSATION_NAMES=Iuliu Pop (Core Grad), John Doe`.
   - Set `CHANNEL_NAMES` to scrape a public or private channels. It's the name you see under "channels" side tab in Slack. Example: `CHANNEL_NAMES=general, random`.
+  - The name doesn't need to be an exact match, it must only match part of the name. For example, if a name tag includes an emoji, you can only write the part of the name tag without it and it should work.
+  - The channel or the conversation must be in the list of channels or DMs in the left sidebar before running the collect script.
 
 - `SCROLL_UP_TIMEOUT` is optional.
 
