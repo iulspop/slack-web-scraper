@@ -26,12 +26,20 @@ async function ScrollFeed(page, channelFeedSelector) {
     async up() {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: -6000 })
-      await page.waitForNetworkIdle()
+      try {
+        await page.waitForNetworkIdle()
+      } catch (error) {
+        console.error('Wait for networked timedout. Redoing scroll up.')
+      }
     },
     async down() {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: 4000 })
-      await page.waitForNetworkIdle()
+      try {
+        await page.waitForNetworkIdle()
+      } catch (error) {
+        console.error('Wait for networked timedout. Redoing scroll down.')
+      }
     },
     async isScrolledToTop() {
       // If channel feed is overflowing beyond the top of the viewport, then there's still more to scroll up.
