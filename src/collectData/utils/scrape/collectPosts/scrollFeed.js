@@ -26,27 +26,37 @@ async function ScrollFeed(page, channelFeedSelector) {
     async up() {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: -6000 })
+      await page.wait
       try {
-        await page.waitForNetworkIdle()
+        await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 2000 })
       } catch (error) {
-        console.error('Wait for networked timedout. Redoing scroll up.')
+        console.error('Waiting for network idle timedout. Redoing scroll up.')
       }
     },
     async down() {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: 4000 })
       try {
-        await page.waitForNetworkIdle()
+        await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 2000 })
       } catch (error) {
-        console.error('Wait for networked timedout. Redoing scroll down.')
+        console.error('Waiting for network idle timedout. Redoing scroll down.')
       }
     },
     async isScrolledToTop() {
       // If channel feed is overflowing beyond the top of the viewport, then there's still more to scroll up.
-      return await channelFeedHandle.evaluate(el => el.getBoundingClientRect().top > 0)
+      const check = async () => await channelFeedHandle.evaluate(el => el.getBoundingClientRect().top > 0)
+      if (await check()) {
+        await page.waitForTimeout(5000)
+        return await check()
+      }
     },
     async isScrolledToBottom() {
-      return await channelFeedHandle.evaluate(el => window.innerHeight - el.getBoundingClientRect().bottom > 0)
+      const check = async () =>
+        await channelFeedHandle.evaluate(el => window.innerHeight - el.getBoundingClientRect().bottom > 0)
+      if (await check()) {
+        await page.waitForTimeout(3000)
+        return await check()
+      }
     },
   }
 }
