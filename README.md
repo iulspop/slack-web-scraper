@@ -20,10 +20,11 @@ For example, if you're in the process of leaving your current company to join an
   - `SLACK_WORKSPACE_URL` must be the URL you login to the workspace not `app.slack.com`. Example: `SLACK_WORKSPACE_URL=cloud-native.slack.com`. Note environment variables are set without quotes.
   - `SLACK_EMAIL` and `SLACK_PASSWORD` are credentials used to login into the workspace.
 
-- You must set one of `CONVERSATION_NAMES` or `CHANNEL_NAMES` or both. The collect script will scrape the list of conversations first, then the list of channels. The list is "comma space" delimited: `, `.
+- You must set one of `CONVERSATION_NAMES` or `CHANNEL_NAMES` or both.
 
-  - Set `CONVERSATION_NAMES` to scrape a DM or group chat. The value is the name tag of the person or group chat name as is written under "Direct Messages" in Slack. Example: `CONVERSATION_NAMES=Iuliu Pop (Core Grad), John Doe`.
-  - Set `CHANNEL_NAMES` to scrape a public or private channels. It's the name you see under "channels" side tab in Slack. Example: `CHANNEL_NAMES=general, random`.
+  - The collect script will scrape the list of conversations first, then the list of channels. The list must a valid JSON array: `["element1", "element2"]`. The array elements are double quoted and the last element doesn't have a trailing comma. You can escape a double quote in a string in JSON like this: `["string\"hello"]`
+  - Set `CONVERSATION_NAMES` to scrape a DM or group chat. The value is the name tag of the person or group chat name as is written under "Direct Messages" in Slack. Example: `CONVERSATION_NAMES=["Iuliu Pop (Core Grad)", "John Doe"]`.
+  - Set `CHANNEL_NAMES` to scrape a public or private channels. It's the name you see under "channels" side tab in Slack. Example: `CHANNEL_NAMES=["general", "random"]`.
   - The name doesn't need to be an exact match, it must only match part of the name. For example, if a name tag includes an emoji, you can only write the part of the name tag without it and it should work.
   - The channel or the conversation must be in the list of channels or DMs in the left sidebar before running the collect script.
 
@@ -31,7 +32,10 @@ For example, if you're in the process of leaving your current company to join an
 
   - A timeout in seconds for when to stop scrolling up the channel history and start scraping posts. Useful when scraping channels with a long history but don't need to scrape it all. For a very active channel, it could take 60 seconds to scroll up half a year then ~20min to scrape it. Example: `SCROLL_UP_TIMEOUT=30`
 
-- `HEADLESS_MODE` is optional. Set to `true` to scrape with the browser in headless mode. Example: `HEADLESS_MODE=true`. Helpful for scraping long channel/conversation histories, since the browser runs with a larger vertical viewport so can scrape it larger batches at a time. I recommend you start without running headless mode with one conversation or channel since you can see clearer if the collect scraper is working or not.
+- `HEADLESS_MODE` is optional.
+
+  - Set to `true` to scrape with the browser in headless mode. Example: `HEADLESS_MODE=true`.
+  - Helpful for scraping long channel/conversation histories, since the browser runs with a larger vertical viewport so can scrape it larger batches at a time. I recommend you start without running headless mode with one conversation or channel since you can see clearer if the collect scraper is working or not.
 
 3. Run `npm run collect`. You will see the browser open and start scraping data unless you set `HEADLESS_MODE` to `true`. In headless mode you will see status updates on the scraping process in the console output.
 

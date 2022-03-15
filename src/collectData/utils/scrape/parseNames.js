@@ -1,7 +1,14 @@
 function parseNames(string) {
   if (typeof string !== 'string') return []
   if (string.length === 0) return []
-  return string.split(', ').filter(name => name.length > 0)
+  let names
+  try {
+    names = JSON.parse(string)
+  } catch {
+    console.log('Invalid JSON string provided for CONVERSATION_NAMES or CHANNEL_NAMES. Replacing with empty array.')
+    names = []
+  }
+  return names.filter(name => typeof name === 'string')
 }
 
 function isNoConversationOrChannel() {
