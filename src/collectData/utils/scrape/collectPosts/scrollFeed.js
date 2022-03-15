@@ -28,39 +28,31 @@ async function ScrollFeed(page, channelFeedSelector) {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: -5000 })
       await page.waitForTimeout(1000)
-      HEADLESS_MODE && await page.waitForTimeout(2000)
+      HEADLESS_MODE && (await page.waitForTimeout(1000))
     },
     async down() {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: 4000 })
       await page.waitForTimeout(500)
-      HEADLESS_MODE && await page.waitForTimeout(1000)
+      HEADLESS_MODE && (await page.waitForTimeout(1000))
     },
     async isScrolledToTop() {
       // If channel feed is overflowing beyond the top of the viewport, then there's still more to scroll up.
-      const check = async () => await channelFeedHandle.evaluate(el => el.getBoundingClientRect().top > 0)
-      return await this.doubleCheck(check)
+      const check = async () => await channelFeedHandle.evaluate(el => el.getBoundingClientRect().top > 65)
+      return await this.doubleCheck(check, 'top')
     },
     async isScrolledToBottom() {
       const check = async () =>
-        await channelFeedHandle.evaluate(el => window.innerHeight - el.getBoundingClientRect().bottom > 0)
-      return await this.doubleCheck(check)
+        await channelFeedHandle.evaluate(el => window.innerHeight - el.getBoundingClientRect().bottom > 120)
+      return await this.doubleCheck(check, 'bottom')
     },
-    async doubleCheck(check) {
+    async doubleCheck(check, type) {
       if (await check()) {
-        console.log(
-          'Double checking if scrolled to top/bottom. Waiting seven seconds.',
-          'Current seconds:',
-          new Date().getSeconds()
-        )
+        type === 'top' ? await page.mouse.wheel({ deltaY: -75 }) : await page.mouse.wheel({ deltaY: 75 })
+        console.log(`Double checking if scrolled to ${type === 'top' ? 'top' : 'bottom'}. Waiting seven seconds.`)
         await page.waitForTimeout(7000)
         const result = await check()
-        console.log(
-          'Double checked if scrolled to top/bottom. Result:',
-          result,
-          'Current seconds:',
-          new Date().getSeconds()
-        )
+        console.log(`Double checked if scrolled to ${type === 'top' ? 'top' : 'bottom'}. Result: ${result}`)
         return result
       } else {
         return false
