@@ -26,36 +26,41 @@ async function ScrollFeed(page, channelFeedSelector) {
     async up() {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: -6000 })
-      await page.wait
-      try {
-        await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 2000 })
-      } catch (error) {
-        console.error('Waiting for network idle timedout. Redoing scroll up.')
-      }
+      await page.waitForTimeout(1000)
     },
     async down() {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: 4000 })
-      try {
-        await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 2000 })
-      } catch (error) {
-        console.error('Waiting for network idle timedout. Redoing scroll down.')
-      }
+      await page.waitForTimeout(500)
     },
     async isScrolledToTop() {
       // If channel feed is overflowing beyond the top of the viewport, then there's still more to scroll up.
       const check = async () => await channelFeedHandle.evaluate(el => el.getBoundingClientRect().top > 0)
-      if (await check()) {
-        await page.waitForTimeout(5000)
-        return await check()
-      }
+      return await this.doubleCheck(check)
     },
     async isScrolledToBottom() {
       const check = async () =>
         await channelFeedHandle.evaluate(el => window.innerHeight - el.getBoundingClientRect().bottom > 0)
+      return await this.doubleCheck(check)
+    },
+    async doubleCheck(check) {
       if (await check()) {
-        await page.waitForTimeout(3000)
-        return await check()
+        console.log(
+          'Double checking if scrolled to top/bottom. Waiting seven seconds.',
+          'Current seconds:',
+          new Date().getSeconds()
+        )
+        await page.waitForTimeout(7000)
+        const result = await check()
+        console.log(
+          'Double checked if scrolled to top/bottom. Result:',
+          result,
+          'Current seconds:',
+          new Date().getSeconds()
+        )
+        return result
+      } else {
+        return false
       }
     },
   }
