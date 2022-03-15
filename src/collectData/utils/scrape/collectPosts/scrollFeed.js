@@ -1,4 +1,5 @@
 const SCROLL_UP_TIMEOUT = Number(process.env.SCROLL_UP_TIMEOUT)
+const HEADLESS_MODE = process.env.HEADLESS_MODE === 'true'
 
 async function ScrollFeed(page, channelFeedSelector) {
   const channelFeedHandle = await page.waitForSelector(channelFeedSelector)
@@ -25,13 +26,15 @@ async function ScrollFeed(page, channelFeedSelector) {
     },
     async up() {
       await page.hover(channelFeedSelector)
-      await page.mouse.wheel({ deltaY: -6000 })
+      await page.mouse.wheel({ deltaY: -5000 })
       await page.waitForTimeout(1000)
+      HEADLESS_MODE && await page.waitForTimeout(2000)
     },
     async down() {
       await page.hover(channelFeedSelector)
       await page.mouse.wheel({ deltaY: 4000 })
       await page.waitForTimeout(500)
+      HEADLESS_MODE && await page.waitForTimeout(1000)
     },
     async isScrolledToTop() {
       // If channel feed is overflowing beyond the top of the viewport, then there's still more to scroll up.
