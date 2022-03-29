@@ -2,6 +2,7 @@ const { extractThreadHTML } = require('./extractThreadHTML')
 
 async function extractPostsHTML(page, postsSelector) {
   const postsHTML = []
+  const SKIP_THREADS = process.env.SKIP_THREADS === 'true'
 
   // Starts at index 1 to skip first child element div.p-degraded_list__loading
   const postHandles = await page.$$(postsSelector)
@@ -12,7 +13,7 @@ async function extractPostsHTML(page, postsSelector) {
 
     try {
       const repliesButton = await postHandle.$('.c-message__reply_count')
-      if (repliesButton) {
+      if (repliesButton && SKIP_THREADS === false) {
         const threadHTML = await extractThreadHTML(repliesButton, page)
         postsHTML.push(threadHTML)
       } else {

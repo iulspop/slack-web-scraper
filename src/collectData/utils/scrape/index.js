@@ -6,13 +6,19 @@ const HEADLESS_MODE = process.env.HEADLESS_MODE === 'true'
 
 async function scrapeConversations(page) {
   const conversationNames = parseNames(process.env.CONVERSATION_NAMES)
-  if (conversationNames.length === 0) console.log('No conversations names found. Skipping conversations scrape.')
+  if (conversationNames.length === 0) {
+    console.log('No conversations names found. Skipping conversations scrape.')
+    return;
+  }
   await scrape(page, conversationNames, 'DM')
 }
 
 async function scrapeChannels(page) {
   const channelNames = parseNames(process.env.CHANNEL_NAMES)
-  if (channelNames.length === 0) console.log('No channels names found. Skipping channels scrape.')
+  if (channelNames.length === 0) {
+    console.log('No channels names found. Skipping channels scrape.')
+    return;
+  }
   await scrape(page, channelNames, 'Channel')
 }
 
