@@ -2,7 +2,7 @@ const { ScrollFeed } = require('./scrollFeed')
 const { initSlackDataFile } = require('./initSlackDataFile')
 const { extractPostsHTML } = require('./extractPostsHTML')
 
-async function collectPosts(page, info) {
+async function collectPosts(page, info, skipConversations) {
   const channelFeedSelector = '[data-qa="slack_kit_list"].c-virtual_list__scroll_container[role="list"]'
   const postsSelector = `${channelFeedSelector} > div`
 
@@ -11,7 +11,7 @@ async function collectPosts(page, info) {
 
   const appendHTMLToSlackDataFile = await initSlackDataFile(info)
   await scrollFeed.toBottom(async () => {
-    const postsHTML = await extractPostsHTML(page, postsSelector)
+    const postsHTML = await extractPostsHTML(page, postsSelector, skipConversations)
     appendHTMLToSlackDataFile(postsHTML)
   })
 }

@@ -4,9 +4,16 @@ const { collectPosts } = require('./collectPosts')
 
 const HEADLESS_MODE = process.env.HEADLESS_MODE === 'true'
 
-async function scrapeConversations(page) {
+function skipConversations() {
   const conversationNames = parseNames(process.env.CONVERSATION_NAMES)
-  if (conversationNames.length === 0) console.log('No conversations names found. Skipping conversations scrape.')
+  return conversationNames.length === 0;
+}
+
+async function scrapeConversations(page) {
+  if (skipConversations()) {
+    console.log('No conversations names found. Skipping conversations scrape.')
+    return;
+  }
   await scrape(page, conversationNames, 'DM')
 }
 
@@ -26,7 +33,7 @@ async function scrape(page, names, type) {
       continue
     }
     if (HEADLESS_MODE) console.log(`\nStarted scraping '${name}' ${type}.`)
-    await collectPosts(page, { type, name })
+    await collectPosts(page, { type, name }, skipConversations())
   }
 }
 
