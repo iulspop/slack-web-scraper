@@ -5,6 +5,7 @@
     "parse": "node src/parseData/parseData.js"
   },
   "devDependencies": {
+    "all-contributors-cli": "^6.20.0",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jest": "^26.1.1",

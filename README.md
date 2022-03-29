@@ -47,6 +47,19 @@ You need to configure WSL to connect to a GUI even if the browser launches in he
 
 1. Assuming you already ran `npm run collect`, you can now run `npm run parse`. You will be prompted to select the file to parse from the `slack-data/` folder. Once the parsing is complete, a `slack-data/x.json` file with same name as the source HTML file will be output with the parsed posts/threads.
 
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
 ## Contributing
 
 To contribute to this project, please open an issue describing the features you want to add or code you want to change. Then we can discuss those changes before assigning someone to complete the task.
