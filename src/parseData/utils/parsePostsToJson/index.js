@@ -19,11 +19,11 @@ function parsePostsToJson(dateGroups) {
 function parsePost(html) {
   const $ = cheerio.load(html)
   try {
-    const time = $('.c-timestamp')
-      .attr('data-stringify-text')
-      .replace(/[\[\]]/g, '')
+    const timeTs = parseFloat($('.c-timestamp')
+      .attr('data-ts').trim())
+    const time = new Date(timeTs * 1000).toUTCString();
     const sender = $('.c-message__sender_link').text()
-    const text = $('.p-rich_text_section').html().trim()
+    const text = $('.p-rich_text_block').html().trim()
     return Post(time, sender, text)
   } catch (error) {
     if (DEBUG_MODE) {
