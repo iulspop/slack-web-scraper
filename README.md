@@ -70,7 +70,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Contributing
 
-To contribute to this project, please open an issue describing the features you want to add or code you want to change. Then we can discuss those changes before assigning someone to complete the task.
+Very open to contributions to this project! If you have questions, bug reports or features you want to see, please open an issue. If you want to contribute code, open a pull request and I'll review ASAP.
 
 ## License
 
