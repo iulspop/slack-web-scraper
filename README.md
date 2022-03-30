@@ -37,6 +37,11 @@ For example, if you're in the process of leaving your current company to join an
   - Set to `true` to scrape with the browser in headless mode. Example: `HEADLESS_MODE=true`.
   - Helpful for scraping long channel/conversation histories, since the browser runs with a larger vertical viewport so can scrape it larger batches at a time. I recommend you start without running headless mode with one conversation or channel since you can see clearer if the collect scraper is working or not.
 
+- `SKIP_THREADS` is optional.
+
+  - Set to `true` to disable scraping threads on messages that are in channels or conversations. Example: `SKIP_THREADS=true`.
+  - Helpful if you do not want to scrape all the replies that are made on a message but just have the main message.
+
 3. Before starting the scrape, make sure the Slack App language is set to English. You can reset it once the scrape is finished.
 
 4. Run `npm run collect`. You will see the browser open and start scraping data unless you set `HEADLESS_MODE` to `true`. In headless mode you will see status updates on the scraping process in the console output.
