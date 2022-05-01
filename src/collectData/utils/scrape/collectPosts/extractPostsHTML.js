@@ -20,7 +20,11 @@ async function extractPostsHTML(page, postsSelector) {
         postsHTML.push(postHTML)
       }
     } catch (error) {
-      console.error(`Error scraping post. Skipping this post. Index: ${i}. Error: ${error.message}.`)
+      if (error.message.match('Error scraping thread')) {
+        console.error(error.message)
+      } else {
+        console.error(`\nError scraping post. Skipping this post. Error: ${error.message}.`)
+      }
       continue
     }
 
