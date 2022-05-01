@@ -19,12 +19,14 @@ function parsePostsToJson(dateGroups) {
 function parsePost(html) {
   const $ = cheerio.load(html)
   try {
-    const timeTs = parseFloat($('.c-timestamp')
-      .attr('data-ts').trim())
-    const time = new Date(timeTs * 1000).toUTCString();
+    const dataTs = parseFloat($('.c-timestamp').attr('data-ts').trim())
+    const timestamp = new Date(dataTs * 1000).toUTCString()
+    const time = $('.c-timestamp')
+      .attr('data-stringify-text')
+      .replace(/[\[\]]/g, '')
     const sender = $('.c-message__sender_link').text()
     const text = $('.p-rich_text_block').html().trim()
-    return Post(time, sender, text)
+    return Post(timestamp, time, sender, text)
   } catch (error) {
     if (DEBUG_MODE) {
       console.log('\n###### Error ######\n')
@@ -59,8 +61,15 @@ function parseThread(thread) {
   return firstPost
 }
 
-function Post(time = '', sender = '', text = 'Placeholder Post (Means parsing failed for this post).', replies = []) {
+function Post(
+  timestamp = '',
+  time = '',
+  sender = '',
+  text = 'Placeholder Post (Means parsing failed for this post).',
+  replies = []
+) {
   return {
+    timestamp,
     time,
     sender,
     text,
