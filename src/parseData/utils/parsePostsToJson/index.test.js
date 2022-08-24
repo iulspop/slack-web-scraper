@@ -15,6 +15,18 @@ describe('parsePostsToJson()', () => {
             sender: 'John Doe 1',
             text: `<div class="p-rich_text_section">Hi all! I'm excited to meet everyone and enjoying a break before we find out more about prep. Good luck to anyone still finishing up Core this week!</div>`,
             replies: [],
+            reactions: [
+              {
+                count: 5,
+                emojiAsImage: 'https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-small/1f44b.png',
+                emojiAsText: ':wave:',
+              },
+              {
+                count: 1,
+                emojiAsImage: 'https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-small/1f4aa.png',
+                emojiAsText: ':muscle:',
+              }
+            ],
           },
           {
             timestamp: 'Mon, 08 Nov 2021 22:54:55 GMT',
@@ -28,8 +40,16 @@ describe('parsePostsToJson()', () => {
                 sender: 'John Doe 1',
                 text: '<div class="p-rich_text_section">Still waiting. I think we’ll get more info this week.</div>',
                 replies: [],
+                reactions: [
+                  {
+                    count: 1,
+                    emojiAsImage: 'https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-small/1f44d-1f3fc.png',
+                    emojiAsText: ':+1::skin-tone-3:',
+                  }
+                ],
               },
             ],
+            reactions: [],
           },
         ],
       },
@@ -46,6 +66,18 @@ describe('parsePost()', () => {
       sender: 'John Doe',
       text: `<div class="p-rich_text_section">Hi all! I'm excited to meet everyone and enjoying a break before we find out more about prep.</div>`,
       replies: [],
+      reactions: [
+        {
+          count: 5,
+          emojiAsImage: 'x.com',
+          emojiAsText: ':wave:',
+        },
+        {
+          count: 1,
+          emojiAsImage: 'x.com',
+          emojiAsText: ':muscle:',
+        },
+      ],
     })
   })
 })
@@ -65,8 +97,16 @@ describe('parseThread()', () => {
           sender: 'Mary Jane',
           text: `<div class="p-rich_text_section">Still waiting. I think we'll get more info this week.</div>`,
           replies: [],
+          reactions: [
+            {
+              count: 1,
+              emojiAsImage: 'x.com',
+              emojiAsText: ':+1::skin-tone-3:',
+            }
+          ],
         },
       ],
+      reactions: [],
     })
   })
 })
