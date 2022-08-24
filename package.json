@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "TZ=UTC jest --watch",
+    "test": "TZ=UTC jest",
     "collect": "node src/collectData/collectData.js",
     "parse": "node src/parseData/parseData.js"
   },
