@@ -25,7 +25,7 @@ describe('parsePostsToJson()', () => {
                 count: 1,
                 emojiAsImage: 'https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-small/1f4aa.png',
                 emojiAsText: ':muscle:',
-              }
+              },
             ],
           },
           {
@@ -43,9 +43,10 @@ describe('parsePostsToJson()', () => {
                 reactions: [
                   {
                     count: 1,
-                    emojiAsImage: 'https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-small/1f44d-1f3fc.png',
+                    emojiAsImage:
+                      'https://a.slack-edge.com/production-standard-emoji-assets/13.0/google-small/1f44d-1f3fc.png',
                     emojiAsText: ':+1::skin-tone-3:',
-                  }
+                  },
                 ],
               },
             ],
@@ -102,7 +103,7 @@ describe('parseThread()', () => {
               count: 1,
               emojiAsImage: 'x.com',
               emojiAsText: ':+1::skin-tone-3:',
-            }
+            },
           ],
         },
       ],

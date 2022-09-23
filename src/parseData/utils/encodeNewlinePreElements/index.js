@@ -1,14 +1,14 @@
-const cheerio = require('cheerio');
+const cheerio = require('cheerio')
 
 function encodeNewlinePreElements(html) {
-  const $ = cheerio.load(html);
+  const $ = cheerio.load(html)
 
-  const preElementHandles = $('pre');
+  const preElementHandles = $('pre')
   preElementHandles.each((_, element) => {
-    const newLineEncodedPreText = $(element).text().split('\n').join('\\n');
-    $(element).text(newLineEncodedPreText);
-  });
+    const newLineEncodedPreText = $(element).text().split('\n').join('\\n')
+    $(element).text(newLineEncodedPreText)
+  })
 
-  return $.html();
+  return $.html()
 }
-exports.encodeNewlinePreElements = encodeNewlinePreElements;
+exports.encodeNewlinePreElements = encodeNewlinePreElements

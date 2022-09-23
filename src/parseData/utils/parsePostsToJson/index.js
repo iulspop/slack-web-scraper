@@ -26,23 +26,17 @@ function parsePost(html) {
       .replace(/[\[\]]/g, '')
     const sender = $('.c-message__sender_link').text()
     const text = $('.p-rich_text_block').html().trim()
-    const reactions = [];
+    const reactions = []
     $('.c-reaction_bar > .c-reaction').each((_, reactionCheerioElement) => {
       try {
-        const emoji = $(reactionCheerioElement).find('.c-emoji').first();
-        const count = parseInt($(reactionCheerioElement).find('.c-reaction__count').first().text(), '10');
+        const emoji = $(reactionCheerioElement).find('.c-emoji').first()
+        const count = parseInt($(reactionCheerioElement).find('.c-reaction__count').first().text(), '10')
 
-        reactions.push(
-          Reaction(
-            count,
-            emoji.attr('data-stringify-emoji'),
-            emoji.attr('src')
-          )
-        );
+        reactions.push(Reaction(count, emoji.attr('data-stringify-emoji'), emoji.attr('src')))
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
-    });
+    })
     return Post(timestamp, time, sender, text, [], reactions)
   } catch (error) {
     if (DEBUG_MODE) {
@@ -96,11 +90,7 @@ function Post(
   }
 }
 
-function Reaction(
-  count,
-  emojiAsText,
-  emojiAsImage
-) {
+function Reaction(count, emojiAsText, emojiAsImage) {
   return {
     count,
     emojiAsText,

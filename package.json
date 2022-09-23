@@ -2,7 +2,8 @@
   "scripts": {
     "test": "TZ=UTC jest",
     "collect": "node src/collectData/collectData.js",
-    "parse": "node src/parseData/parseData.js"
+    "parse": "node src/parseData/parseData.js",
+    "format": "prettier -w ."
   },
   "devDependencies": {
     "all-contributors-cli": "^6.20.0",

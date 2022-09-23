@@ -8,7 +8,7 @@ async function scrapeConversations(page) {
   const conversationNames = parseNames(process.env.CONVERSATION_NAMES)
   if (conversationNames.length === 0) {
     console.log('No conversations names found. Skipping conversations scrape.')
-    return;
+    return
   }
   await scrape(page, conversationNames, 'DM')
 }
@@ -17,7 +17,7 @@ async function scrapeChannels(page) {
   const channelNames = parseNames(process.env.CHANNEL_NAMES)
   if (channelNames.length === 0) {
     console.log('No channels names found. Skipping channels scrape.')
-    return;
+    return
   }
   await scrape(page, channelNames, 'Channel')
 }
