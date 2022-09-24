@@ -1,6 +1,7 @@
 {
   "scripts": {
     "test": "TZ=UTC jest",
+    "auth": "node ./src/authenticate.js",
     "collect": "node src/collectData/collectData.js",
     "parse": "node src/parseData/parseData.js",
     "format": "prettier -w ."
@@ -18,7 +19,9 @@
     "dotenv": "^16.0.0",
     "inquirer": "^8.2.1",
     "jsonfile": "^6.1.0",
-    "puppeteer": "^13.5.1",
+    "puppeteer": "^13.7.0",
+    "puppeteer-extra": "^3.3.4",
+    "puppeteer-extra-plugin-stealth": "^2.11.1",
     "sugar": "^2.0.6"
   }
 }

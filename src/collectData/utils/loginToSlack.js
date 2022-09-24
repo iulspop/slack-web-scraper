@@ -48,4 +48,4 @@ async function createFolderIfDoesntExist(folderPath) {
   }
 }
 
-exports.loginToSlack = loginToSlack
+module.exports = { loginToSlack, saveCookies }
