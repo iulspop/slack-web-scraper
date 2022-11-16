@@ -24,8 +24,8 @@ function parsePost(html) {
     const time = $('.c-timestamp')
       .attr('data-stringify-text')
       .replace(/[\[\]]/g, '')
-    const sender = $('.c-message__sender_link').text()
-    const text = $('.p-rich_text_block').html().trim()
+    onst sender = $('.c-message__sender_button').text()
+    const text = $('.p-rich_text_section').html().trim()
     const reactions = []
     $('.c-reaction_bar > .c-reaction').each((_, reactionCheerioElement) => {
       try {
