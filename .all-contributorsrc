@@ -32,6 +32,16 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "Edwin15857",
+      "name": "NotEdwin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54582223?v=4",
+      "profile": "http://notedwin.co",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
