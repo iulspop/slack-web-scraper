@@ -62,10 +62,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/iulspop"><img src="https://avatars.githubusercontent.com/u/53665722?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Iuliu Pop</b></sub></a><br /><a href="#ideas-iulspop" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/iulspop/slack-web-scraper/commits?author=iulspop" title="Code">💻</a> <a href="https://github.com/iulspop/slack-web-scraper/commits?author=iulspop" title="Documentation">📖</a> <a href="https://github.com/iulspop/slack-web-scraper/pulls?q=is%3Apr+reviewed-by%3Aiulspop" title="Reviewed Pull Requests">👀</a> <a href="#question-iulspop" title="Answering Questions">💬</a></td>
-    <td align="center"><a href="https://williamdes.eu/en/"><img src="https://avatars.githubusercontent.com/u/7784660?v=4?s=100" width="100px;" alt=""/><br /><sub><b>William Desportes</b></sub></a><br /><a href="https://github.com/iulspop/slack-web-scraper/commits?author=williamdes" title="Code">💻</a> <a href="https://github.com/iulspop/slack-web-scraper/issues?q=author%3Awilliamdes" title="Bug reports">🐛</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/iulspop"><img src="https://avatars.githubusercontent.com/u/53665722?v=4?s=100" width="100px;" alt="Iuliu Pop"/><br /><sub><b>Iuliu Pop</b></sub></a><br /><a href="#ideas-iulspop" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/iulspop/slack-web-scraper/commits?author=iulspop" title="Code">💻</a> <a href="https://github.com/iulspop/slack-web-scraper/commits?author=iulspop" title="Documentation">📖</a> <a href="https://github.com/iulspop/slack-web-scraper/pulls?q=is%3Apr+reviewed-by%3Aiulspop" title="Reviewed Pull Requests">👀</a> <a href="#question-iulspop" title="Answering Questions">💬</a></td>
+      <td align="center"><a href="https://williamdes.eu/en/"><img src="https://avatars.githubusercontent.com/u/7784660?v=4?s=100" width="100px;" alt="William Desportes"/><br /><sub><b>William Desportes</b></sub></a><br /><a href="https://github.com/iulspop/slack-web-scraper/commits?author=williamdes" title="Code">💻</a> <a href="https://github.com/iulspop/slack-web-scraper/issues?q=author%3Awilliamdes" title="Bug reports">🐛</a></td>
+      <td align="center"><a href="http://notedwin.co"><img src="https://avatars.githubusercontent.com/u/54582223?v=4?s=100" width="100px;" alt="NotEdwin"/><br /><sub><b>NotEdwin</b></sub></a><br /><a href="https://github.com/iulspop/slack-web-scraper/issues?q=author%3AEdwin15857" title="Bug reports">🐛</a> <a href="https://github.com/iulspop/slack-web-scraper/commits?author=Edwin15857" title="Code">💻</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
