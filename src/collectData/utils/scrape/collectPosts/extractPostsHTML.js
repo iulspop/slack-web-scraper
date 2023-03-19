@@ -12,7 +12,7 @@ async function extractPostsHTML(page, postsSelector) {
     if (await postHandle.evaluate(post => post.isScraped)) continue
 
     try {
-      const repliesButton = await postHandle.$('.c-message__reply_count')
+      const repliesButton = await postHandle.$('button.c-link--button.c-message_reply_count')
       if (repliesButton && SKIP_THREADS === false) {
         const threadHTML = await extractThreadHTML(repliesButton, page)
         postsHTML.push(threadHTML)

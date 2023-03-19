@@ -4,13 +4,13 @@ async function extractThreadHTML(repliesButton, page) {
   await repliesButton.click()
   await repliesButton.click()
 
-  const threadSelector =
-    '[data-qa="slack_kit_list"].c-virtual_list__scroll_container[role="list"][aria-label^="Thread"]'
+  const threadSelector = 'span.c-message__reply_bar_view_thread'
+  
   try {
     const threadHandle = await page.waitForSelector(threadSelector)
     const threadHTML = await threadHandle.evaluate(thread => thread.outerHTML)
 
-    const closeThreadButton = await page.$('[aria-label="Close Right Sidebar"]')
+    const closeThreadButton = await page.$('[data-qa="close_flexpane"]')
     await closeThreadButton.click()
 
     return threadHTML
