@@ -7,16 +7,14 @@ async function ScrollFeed(page, channelFeedSelector) {
   return {
     async toTop(onScrollCallback = async () => {}) {
       const startTime = new Date()
-      console.log('Scrolling to top...', getHoursAndMinutesTimestamp())
-      do {
-        await onScrollCallback()
-        await this.up()
-        if (SCROLL_UP_TIMEOUT && differenceInSeconds(startTime, new Date()) >= SCROLL_UP_TIMEOUT) {
-          console.log(`Scroll up timed out after ${differenceInSeconds(startTime, new Date())} seconds`)
-          break
-        }
-      } while (!(await this.isScrolledToTop()))
-      console.log('Scrolled to top.', getHoursAndMinutesTimestamp())
+      await page.waitForTimeout(500)
+      console.log('Clicking date navigation')
+      await page.click('button.c-message_list__day_divider__label__pill')
+      await page.waitForTimeout(500)
+      console.log('Clicking the very beginning')
+      const button = await page.$x("//div[@class='c-menu_item__li']")
+      await button[button.length-2].click()
+      await page.waitForTimeout(1000)
     },
     async toBottom(onScrollCallback = async () => {}) {
       do {
@@ -38,12 +36,14 @@ async function ScrollFeed(page, channelFeedSelector) {
     },
     async isScrolledToTop() {
       // If channel feed is overflowing beyond the top of the viewport, then there's still more to scroll up.
-      const check = async () => await channelFeedHandle.evaluate(el => el.getBoundingClientRect().top > 65)
+      console.log(`el.getBoundingClientRect().top is ${await channelFeedHandle.evaluate(el => el.getBoundingClientRect().top)}`) // values usually between -1600 and -3700
+      const check = async () => await channelFeedHandle.evaluate(el => el.getBoundingClientRect().top > 0)
       return await this.doubleCheck(check, 'top')
     },
     async isScrolledToBottom() {
+      console.log(`el.getBoundingClientRect().bottom is ${await channelFeedHandle.evaluate(el => el.getBoundingClientRect().bottom)}`) // values usually between 
       const check = async () =>
-        await channelFeedHandle.evaluate(el => window.innerHeight - el.getBoundingClientRect().bottom > 120)
+        await channelFeedHandle.evaluate(el => window.innerHeight - el.getBoundingClientRect().bottom > 500)
       return await this.doubleCheck(check, 'bottom')
     },
     async doubleCheck(check, type) {
