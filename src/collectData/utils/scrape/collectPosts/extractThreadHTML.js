@@ -10,7 +10,7 @@ async function extractThreadHTML(repliesButton, page) {
     const threadHandle = await page.waitForSelector(threadSelector)
     const threadHTML = await threadHandle.evaluate(thread => thread.outerHTML)
 
-    const closeThreadButton = await page.$('[aria-label="Close Right Sidebar"]')
+    const closeThreadButton = await page.$('[aria-label="Close secondary view"]')
     await closeThreadButton.click()
 
     return threadHTML
