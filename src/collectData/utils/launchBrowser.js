@@ -20,7 +20,7 @@ async function launchBrowser() {
     }
   }
   const browser = await puppeteer.launch(options)
-  if (HEADLESS_MODE) console.log('Headless browser launched successfully')
+  console.log('Browser launched successfully')
   const page = await browser.newPage()
   return { page, browser }
 }
