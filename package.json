@@ -18,7 +18,7 @@
     "dotenv": "^16.0.0",
     "inquirer": "^8.2.1",
     "jsonfile": "^6.1.0",
-    "puppeteer": "^13.5.1",
+    "puppeteer": "^21.7.0",
     "sugar": "^2.0.6"
   }
 }
