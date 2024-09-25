@@ -1,3 +1,11 @@
+# Project No Longer Maintained
+
+I created this for collecting analytics data for study community I organized where everything happened on Slack. That was long ago and I have no use for maintaining this.
+
+In retrospect, if I were to build a Slack scraper from scratch, I would focus on intercepting network requests and reading message data from there, instead of scraping and parsing the HTML. Much easier and more reliable. You can even make it a script or service worker you copy/paste manually into your Slack browser tab, to avoid the authentication issues people keep having on automated browsers. That's my recommmendation if someone needs this.
+
+Good luck!
+
 # Slack Web Scraper
 
 ![][slack_messages_to_parsed_posts]
