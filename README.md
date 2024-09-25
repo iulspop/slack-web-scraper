@@ -4,6 +4,8 @@ I created this for collecting analytics data for study community I organized whe
 
 In retrospect, if I were to build a Slack scraper from scratch, I would focus on intercepting network requests and reading message data from there, instead of scraping and parsing the HTML. Much easier and more reliable. You can even make it a script or service worker you copy/paste manually into your Slack browser tab, to avoid the authentication issues people keep having on automated browsers. That's my recommmendation if someone needs this.
 
+It might be even as simple as starting a HAR file recording using the DevTools network tab, scrolling up to whatever point in a chat/search you want to save, saving the file, filtering cookies/credentials, and prompting LLM to write script to parse the HAR JSON.
+
 Good luck!
 
 # Slack Web Scraper
